@@ -119,8 +119,8 @@ There are two main branchesin the repository: tsan for ktsan changes itself,
 and tsan-fixes for various false positive fixes and suppressions.
 
 Currently the kernel with ktsan enabled boots, but still produces a lot of
-false positive reports. It seems that to get rid of these reports, events that
-come from interrupts shouldn't be handled by ktsan since they are used for some
+false positive reports. It seems that to get rid of these reports events that
+come from interrupts shouldn't be ignored by ktsan since they are used for some
 synchronization.
 
 
