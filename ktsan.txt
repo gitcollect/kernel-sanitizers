@@ -1,0 +1,146 @@
+KernelThreadSanitizer
+=====================
+
+0. Overview
+===========
+
+KernelThreadSanitizer (ktsan) is a dynamic data race detector for Linux kernel.
+Supports only x86_64 SMP kernel. Currently in development.
+For the current state of the tool see the 'Current state' section.
+
+Project homepage: https://code.google.com/p/thread-sanitizer/wiki/ThreadSanitizerForKernel
+
+Project repository: https://github.com/google/ktsan
+
+TODO: requires patched GCC.
+
+
+1. Reports
+==========
+
+Here is a report we got while running ktsan:
+
+==================================================================
+ThreadSanitizer: data-race in __kmem_cache_alias
+
+Write of size 4 by thread T1 (K1):
+ [<ffffffff812376e1>] __kmem_cache_alias+0x81/0xa0 mm/slab.c:2071
+ [<ffffffff811ed2ce>] kmem_cache_create+0x5e/0x2b0 mm/slab_common.c:389
+ [<ffffffff82564a99>] scsi_init_queue+0xac/0x1ac drivers/scsi/scsi_lib.c:2266
+ [<ffffffff82564964>] init_scsi+0x15/0x9e drivers/scsi/scsi.c:1228
+ [<ffffffff8100033d>] do_one_initcall+0xbd/0x220 init/main.c:802
+ [<     inlined    >] kernel_init_freeable+0x2c4/0x391 do_initcall_level init/main.c:867
+ [<     inlined    >] kernel_init_freeable+0x2c4/0x391 do_initcalls init/main.c:875
+ [<     inlined    >] kernel_init_freeable+0x2c4/0x391 do_basic_setup init/main.c:894
+ [<ffffffff82508923>] kernel_init_freeable+0x2c4/0x391 init/main.c:1020
+ [<ffffffff81e2aaf6>] kernel_init+0x16/0x150 init/main.c:945
+ [<ffffffff81e3f6bc>] ret_from_fork+0x7c/0xb0 arch/x86/kernel/entry_64.S:347
+DBG: cpu = ffff88053fc9df10
+
+Previous read of size 4 by thread T459 (K456):
+ [<ffffffff8123441c>] kmem_cache_alloc+0xfc/0x8e0 mm/slab.c:3404
+ [<ffffffff8126702c>] getname_kernel+0x6c/0xd0 fs/namei.c:230
+ [<ffffffff810a3100>] ____call_usermodehelper+0x230/0x2d0 kernel/kmod.c:256
+ [<ffffffff81e3f6bc>] ret_from_fork+0x7c/0xb0 arch/x86/kernel/entry_64.S:347
+DBG: cpu = 0
+
+DBG: addr: ffff880203400774
+DBG: first offset: 4, second offset: 4
+DBG: T1 clock: {T1: 6677455, T459: 0}
+DBG: T459 clock: {T459: 986}
+==================================================================
+
+TODO: describe
+TODO: symbolizer script
+
+
+2. Technical description
+========================
+
+GLOBAL TODO: high level description.
+
+TODO: uses compiler instrumentation.
+TODO: works as tsan.
+
+Supported synchronization
+-------------------------
+
+Currently ktsan has support for the following synchronization primitives:
+spinlock, rwlock, sema, rwsem, completion, mutex, atomics, atomic bitops,
+rcu, rcu_bh, rcu_sched, bit_lock, per-cpu variables.
+
+Support for the following primitives is not added yet: srcu.
+
+
+TODO: KTSAN_SANITIZE := n, KTSAN_SANITIZE_file.o = n
+TODO: suppressing races with ACCESS_ONCE
+
+TODO: memory requirements
+
+
+3. Implementation details
+=========================
+
+GLOBAL TODO: some specific low level details.
+
+The following kernel parts are not instrumented:
+arch/x86/boot/, arch/x86/boot/compressed/, arch/x86/kernel/nmi.o,
+arch/x86/kernel/cpu/common.o, arch/x86/kernel/cpu/perf_event.o,
+arch/x86/realmode/, arch/x86/vdso/, kernel/sched/, kernel/softirq.o.
+TODO: why some parts are not instrumented
+TODO: not instrumented code may cause stack disappearance
+
+TODO: reports from interrupts are ignored
+TODO: how sync primitives are supported
+TODO: when threads start and when finish
+TODO: where lies the shadow
+TODO: about ENTER and LEAVE
+TODO: difference between ktsan_init and ktsan_init_early
+TODO: what we do on kmalloc and kfree
+TODO: how to run ktsan tests
+TODO: quarantine for threads
+TODO: how to see the stats
+
+Right now many kernel developers don't use atomics explicitly thinking that
+all less-than-8 bytes sized memory accesses should be atomic. Sometimes they
+even use ACCESS_ONCE to prevent compiler's reordering. Because of the large
+amount of "benign" races caused by this we decided to ignore memory accesses
+which are done using ACCESS_ONCE for now. This is done by disabling compiler
+instrumentation for volatile types' accesses. Therefore ACCESS_ONCE may be
+used to suppress unwanted race reports.
+
+
+4. Current state
+================
+
+Project repository: https://github.com/google/ktsan
+
+There are two main branchesin the repository: tsan for ktsan changes itself,
+and tsan-fixes for various false positive fixes and suppressions.
+
+Currently the kernel with ktsan enabled boots, but still produces a lot of
+false positive reports. It seems that to get rid of these reports, events that
+come from interrupts shouldn't be handled by ktsan since they are used for some
+synchronization.
+
+
+5. Other notes
+==============
+
+Atomics + memory barriers
+-------------------------
+
+Stand-alone memory barrier (membar) support:
+You will need to add 2 additional vector clocks (VCs) per thread: one
+for non-materialized acquire synchronization (acquire_clk) and another
+for non-materialized release synchronization (release_clk).
+Then, instrument all relaxed/membar-less atomic loads with
+kt_clk_acquire(&thr->acquire_clk, &atomic_var->clk). And instrument
+rmb (read memory barrier) with kt_clk_acquire(&thr->clk,
+&thr->acquire_clk). This will effectively turn "atomic_load; rmb"
+sequence into load-acquire.
+Similarly for wmb (write memory barrier): instrument wmb with
+kt_clk_release(&thr->release_clk, &thr->clk); and relaxed/membar-less
+atomic stores with kt_clk_release(&atomic_var->clk,
+&thr->release_clk). This will effectively turn "wmb; atomic_store"
+sequence into store-release.
