@@ -6,19 +6,18 @@ KernelThreadSanitizer
 
 KernelThreadSanitizer (ktsan) is a dynamic data race detector for Linux kernel.
 Supports only x86_64 SMP kernel. Currently in development.
+A patched GCC is required to build the kernel with ktsan enabled.
 For the current state of the tool see the 'Current state' section.
 
 Project homepage: https://code.google.com/p/thread-sanitizer/wiki/ThreadSanitizerForKernel
 
 Project repository: https://github.com/google/ktsan
 
-TODO: requires patched GCC.
-
 
 1. Reports
 ==========
 
-Here is a report we got while running ktsan:
+Here is an example of a report that can be obtained while running ktsan:
 
 ==================================================================
 ThreadSanitizer: data-race in __kmem_cache_alias
@@ -50,56 +49,67 @@ DBG: T1 clock: {T1: 6677455, T459: 0}
 DBG: T459 clock: {T459: 986}
 ==================================================================
 
-TODO: describe
-TODO: symbolizer script
+This report was preprocessed using our symbolizer script that adds file and
+line info, see the homepage for details.
+
+As the report shows, there is a data race between a write of size 4 in
+__kmem_cache_alias and a read of size 4 in kmem_cache_alloc, both of which
+access cachep->object_size without any synchronization.
+
+This report haven't been sent upstream, since kernel developers tend to think
+that 4-byte sized loads and stores are atomic.
 
 
 2. Technical description
 ========================
 
-GLOBAL TODO: high level description.
+Overall ktsan logic is similar to that of the userspace ThreadSanitizer.
+Compiler instrumentation is used to add a __tsan__loadN / __tsan_storeN
+calls before each memory access. Also a lot of hooks are added in scheduler
+and various synchronization primitives. All theese hooks are used to gather
+information about kernel's execution. A report is printed when a data race
+is detected.
 
-TODO: uses compiler instrumentation.
-TODO: works as tsan.
+Information about ThreadSanitizer alorithm can be found on the homepage
+of the tool. For questions contact dvyukov@google.com.
 
-Supported synchronization
--------------------------
+TODO: describe ThreadSanitizer algorithm
 
 Currently ktsan has support for the following synchronization primitives:
 spinlock, rwlock, sema, rwsem, completion, mutex, atomics, atomic bitops,
 rcu, rcu_bh, rcu_sched, bit_lock, per-cpu variables.
 
-Support for the following primitives is not added yet: srcu.
-
-
-TODO: KTSAN_SANITIZE := n, KTSAN_SANITIZE_file.o = n
-TODO: suppressing races with ACCESS_ONCE
-
-TODO: memory requirements
+Support for the following primitives is not added yet: srcu, memory barriers.
 
 
 3. Implementation details
 =========================
 
-GLOBAL TODO: some specific low level details.
+Instrumentation
+---------------
+
+A patched GCC is required to built the kernel with ktsan enabled.
+More information can be found on the homepage.
 
 The following kernel parts are not instrumented:
 arch/x86/boot/, arch/x86/boot/compressed/, arch/x86/kernel/nmi.o,
 arch/x86/kernel/cpu/common.o, arch/x86/kernel/cpu/perf_event.o,
 arch/x86/realmode/, arch/x86/vdso/, kernel/sched/, kernel/softirq.o.
-TODO: why some parts are not instrumented
-TODO: not instrumented code may cause stack disappearance
 
-TODO: reports from interrupts are ignored
-TODO: how sync primitives are supported
-TODO: when threads start and when finish
-TODO: where lies the shadow
-TODO: about ENTER and LEAVE
-TODO: difference between ktsan_init and ktsan_init_early
-TODO: what we do on kmalloc and kfree
-TODO: how to run ktsan tests
-TODO: quarantine for threads
-TODO: how to see the stats
+Mainly the reason for these parts being not instrumented is that kernel
+doesn't boot when instrumentation is enabled. The exact reasons for this
+behavior weren't investigated. Also kernel/softirq.o instumentation had
+to be disabled, since it corrupts the trace (some functions are entered,
+but not exited).
+
+The lack of instrumentation can cause parts of the stack traces go missing.
+This happens only for stack traces of the previous access, since they are
+restored using trace. In particular this happens in the rb_insert_color report,
+because a few stack trace's frames come from kernel/sched/core.o.
+
+To disable the instrumentation of a particular kernel part add to makefile
+KTSAN_SANITIZE := n (to disable instrumentation of a whole module) or
+KTSAN_SANITIZE_file.o = n (to disable instrumentation of a particular file).
 
 Right now many kernel developers don't use atomics explicitly thinking that
 all less-than-8 bytes sized memory accesses should be atomic. Sometimes they
@@ -110,18 +120,104 @@ instrumentation for volatile types' accesses. Therefore ACCESS_ONCE may be
 used to suppress unwanted race reports.
 
 
+Shadow
+------
+
+The shadow memory holds infromation about a few (4 right now) last memory
+accesses to each memory cell (with is 8-byte sized now). So for each 8 bytes
+of kernel memory threre are 32 bytes of shadow memory, which contain the
+thread id, clock, size, etc. of a few last accesses to these 8 bytes.
+
+For each physical memory page another 4 shadow pages are allocated. The
+implementation is almost same as in kmemcheck. The '__GFP_NOTRACK' flag
+can be used to disable allocating shadow for a particular memory page.
+
+
+Threads
+-------
+
+Each kernel thread has a corresponding ktsan thread structure. It contains
+various fields: ids, clock, trace, etc. (see mm/ktsan/ktsan.h).
+
+All the synchronization events and memory accesses that come from scheduler
+are ignored. This is done so two consequently executed theads not to be
+sychronized with each other.
+
+Each thread has a cpu pointer assigned to it. When a thread enters scheduler
+the cpu pointer is assigned to NULL. When it leaves scheduler it assigned
+to the pointer to the new cpu it's strted to run on. Before each synchronization
+event or memory access the cpu pointer of the current thread is checked. If
+it's equal to NULL the event is ignored.
+
+Also all ktsan events that come from interrupts are now ignored. It causes
+some issues since interrupts might be used for synchronization (see the
+'Current state' section).
+
+Since a data race may happen after a kernel thread was destroyed, the ktsan
+thread structure is put in quaratine instead of being freed.
+
+
+Synchronization primitives
+--------------------------
+
+A clock for each sync object (see ThreadSanitizer algorithm) is stored in a
+sync object structre (see mm/ktsan/ktsan.h), which is allocated when the
+sync object is accessed for the first time. When a block of memory is freed,
+we delete the structures of the sync objects lying in this block.
+
+Also when freeing a block of memory we make an artificial write into every byte
+of this block to catch racy use-after-free accesses. When allocating a memory
+block we imitate access to this block clearing all the previous accesses'
+description from the according shadow memory.
+
+TODO: sync primitives support implementation
+
+Atomics and memory barrier pairing are not supported yet. Right now every
+atomic operations is considered as one with an appropriate memory barrier(s).
+
+
+Other
+-----
+
+When kernel boots ktsan is not enabled from the very beginning, since it
+requires some kernel parts to be initialized before it can be enabled.
+After that ktsan is enabled by calling the 'ktsan_init()' function.
+There is also 'ktsan_init_early()' that reserves physical memory that must
+be called before 'kmem_cache_init()'. (Actually everything from 'ktsan_init()'
+can probably be moved to 'ktsan_init_early()'). We don't use kmem_caches, but
+have our own allocator.
+
+Before handling any ktsan event (memory accesses, syncronization events, etc.)
+we ensure that 1) ktsan is enabled, 2) we are not in an interrupt, 3) we are
+not in scheduler (unless this events should be handled even if it comes from
+scheduler, e.g. thread start and stop events), 4) we are not in ktsan runtime
+already (to avoid recursion). If any of the checks fail we ignore the event.
+See the macro 'ENTER' in mm/ktsan/ktsan.h for details.
+
+There a few tests for ktsan that deliberately try to do data races to see if
+ktsan can detect them. The tests can be run by writing 'tsan_run_tests' into
+the /proc/ktsan_tests file. Right now there a few false negatives in the tests.
+
+Also ktsan gather various statisticcs while running. It can be seen by reading
+the /proc/ktsan_stats file.
+
+
 4. Current state
 ================
 
 Project repository: https://github.com/google/ktsan
 
-There are two main branchesin the repository: tsan for ktsan changes itself,
-and tsan-fixes for various false positive fixes and suppressions.
+There are two important branches in the repository: tsan for ktsan changes
+itself, and tsan-fixes for various false positive fixes and suppressions.
 
 Currently the kernel with ktsan enabled boots, but still produces a lot of
-false positive reports. It seems that to get rid of these reports events that
+false positive reports. It seems that to get rid of these reports, events that
 come from interrupts shouldn't be ignored by ktsan since they are used for some
 synchronization.
+
+Right now ktsan requires a lot of physical memory (about 16 GB), but this value
+can be reduced by descreasing 'KT_MAX_THREAD_ID' in mm/ktsan.h. However it
+shouldn't be less than the maximum number of alive threads.
 
 
 5. Other notes
