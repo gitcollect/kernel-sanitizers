@@ -1,0 +1,238 @@
+commit 4dbc40584349eb9c57be46e9264cf93b6e374d3a
+Author: Andrey Konovalov <adech.fo@gmail.com>
+Date:   Tue Dec 30 15:34:09 2014 +0300
+
+    Enable events from interrupts
+
+diff --git a/include/linux/ktsan.h b/include/linux/ktsan.h
+index 4f4b591..58db7c5 100644
+--- a/include/linux/ktsan.h
++++ b/include/linux/ktsan.h
+@@ -28,6 +28,8 @@ struct ktsan_thr_s {
+ void ktsan_init_early(void);
+ void ktsan_init(void);
+ 
++void ktsan_print_diagnostics(void);
++
+ void ktsan_report_disable(void);
+ void ktsan_report_enable(void);
+ 
+diff --git a/kernel/locking/rwsem.c b/kernel/locking/rwsem.c
+index 5bc05da..482ecdd 100644
+--- a/kernel/locking/rwsem.c
++++ b/kernel/locking/rwsem.c
+@@ -110,9 +110,9 @@ EXPORT_SYMBOL(down_write_trylock);
+  */
+ void up_read(struct rw_semaphore *sem)
+ {
+-	ktsan_mtx_pre_unlock(sem, false);
+ 	rwsem_release(&sem->dep_map, 1, _RET_IP_);
+ 
++	ktsan_mtx_pre_unlock(sem, false);
+ 	__up_read(sem);
+ }
+ 
+@@ -123,10 +123,10 @@ EXPORT_SYMBOL(up_read);
+  */
+ void up_write(struct rw_semaphore *sem)
+ {
+-	ktsan_mtx_pre_unlock(sem, true);
+ 	rwsem_release(&sem->dep_map, 1, _RET_IP_);
+ 
+ 	rwsem_clear_owner(sem);
++	ktsan_mtx_pre_unlock(sem, true);
+ 	__up_write(sem);
+ }
+ 
+diff --git a/kernel/sched/core.c b/kernel/sched/core.c
+index 2b3dc79..e7aee92 100644
+--- a/kernel/sched/core.c
++++ b/kernel/sched/core.c
+@@ -2261,18 +2261,24 @@ static struct rq *finish_task_switch(struct task_struct *prev)
+ 		if (prev->sched_class->task_dead)
+ 			prev->sched_class->task_dead(prev);
+ 
+-		/* To store stats in a per cpu struct set thr->cpu
+-		   with ktsan_thr_start and revert with ktsan_thr_stop. */
+-		ktsan_thr_start();
+-		ktsan_thr_destroy(&prev->ktsan);
+-		ktsan_thr_stop();
+-
+ 		/*
+ 		 * Remove function-return probe instances associated with this
+ 		 * task and put them back on the free list.
+ 		 */
+ 		kprobe_flush_task(prev);
++
++		/* To store stats in a per cpu struct set thr->cpu
++		   with ktsan_thr_start and revert with ktsan_thr_stop. */
++		ktsan_thr_start();
++
++		/* Synchronize to the previous thread since it might
++		   have accessed prev struct, see comment in __schedule. */
++		ktsan_sync_acquire(prev);
++
+ 		put_task_struct(prev);
++
++		ktsan_thr_destroy(&prev->ktsan);
++		ktsan_thr_stop();
+ 	}
+ 
+ 	tick_nohz_task_switch(current);
+@@ -2771,12 +2777,17 @@ static void __sched __schedule(void)
+ 
+ need_resched:
+ 	preempt_disable();
+-	ktsan_thr_stop();
+ 	cpu = smp_processor_id();
+ 	rq = cpu_rq(cpu);
+ 	rcu_note_context_switch();
+ 	prev = rq->curr;
+ 
++	/* The next thread might access prev structure while deleting it,
++	   but the synchronization that come from scheduler is not seen by
++	   ktsan, so we manually synchronize the next and prev threads. */
++	ktsan_sync_release(prev);
++	ktsan_thr_stop();
++
+ 	schedule_debug(prev);
+ 
+ 	if (sched_feat(HRTICK))
+diff --git a/kernel/time/timer.c b/kernel/time/timer.c
+index 01dc426..cf1f5d6 100644
+--- a/kernel/time/timer.c
++++ b/kernel/time/timer.c
+@@ -1399,7 +1399,7 @@ static void run_timer_softirq(struct softirq_action *h)
+ 
+ 	hrtimer_run_pending();
+ 
+-	if (time_after_eq(jiffies, base->timer_jiffies))
++	if (time_after_eq(jiffies, ACCESS_ONCE(base->timer_jiffies)))
+ 		__run_timers(base);
+ }
+ 
+diff --git a/mm/ktsan/ktsan.c b/mm/ktsan/ktsan.c
+index f6ba5a3..aeef7f1 100644
+--- a/mm/ktsan/ktsan.c
++++ b/mm/ktsan/ktsan.c
+@@ -15,20 +15,20 @@ kt_ctx_t kt_ctx;
+ 
+ #define DISABLE_INTERRUPTS(flags)	\
+ 	preempt_disable();		\
+-	local_irq_save(flags);		\
++	/*local_irq_save(flags);*/		\
++	flags = arch_local_irq_save();		\
+ 	stop_nmi()			\
+ /**/
+ 
+ #define ENABLE_INTERRUPTS(flags)	\
+ 	restart_nmi();			\
+-	local_irq_restore(flags);	\
++	/*local_irq_restore(flags);*/	\
++	arch_local_irq_restore(flags);	\
+ 	preempt_enable()		\
+ /**/
+ 
+ #define IN_INTERRUPT()			\
+-	(in_irq() ||			\
+-	 in_serving_softirq() ||	\
+-	 in_nmi())			\
++	 (in_nmi())			\
+ /**/
+ 
+ /* If scheduler is false the events generated from
+@@ -40,12 +40,16 @@ kt_ctx_t kt_ctx;
+ 	int kt_inside_was;					\
+ 	bool event_handled;					\
+ 								\
++	thr = NULL;						\
++	kt_inside_was = -1;					\
+ 	event_handled = false;					\
+ 								\
++	DISABLE_INTERRUPTS(kt_flags);				\
++								\
+ 	if (!kt_ctx.enabled)					\
+ 		goto exit;					\
+ 								\
+-	/* Ignore reports from interrupts for now. */		\
++	/* Ignore reports from some interrupts for now. */	\
+ 	if (IN_INTERRUPT())					\
+ 		goto exit;					\
+ 								\
+@@ -57,7 +61,9 @@ kt_ctx_t kt_ctx;
+ 	thr = current->ktsan.thr;				\
+ 	pc = (uptr_t)_RET_IP_;					\
+ 								\
+-	if (!(scheduler) && thr->cpu == NULL)			\
++	/* Check !in_irq() since some interrupts may come	\
++	   from scheduler. FIXME(xairy): warnings appear. */	\
++	if (!(scheduler) && thr->cpu == NULL && !in_irq())	\
+ 		goto exit;					\
+ 								\
+ 	kt_inside_was = kt_atomic32_cmpxchg_no_ktsan(		\
+@@ -66,11 +72,6 @@ kt_ctx_t kt_ctx;
+ 		goto exit;					\
+ 	}							\
+ 								\
+-	/* Interrupts should be disabled after setting		\
+-	   thr->inside, since local_irq_save and		\
+-	   preempt_disable are called. */			\
+-	DISABLE_INTERRUPTS(kt_flags);				\
+-								\
+ 	event_handled = true;					\
+ /**/
+ 
+@@ -78,11 +79,6 @@ kt_ctx_t kt_ctx;
+ 	/* thr might become NULL in ktsan_thread_destroy. */	\
+ 	thr = current->ktsan.thr;				\
+ 								\
+-	/* Interrupts should be enabled before setting		\
+-	   thr->inside, since local_irq_restore and		\
+-	   preempt_enable are called. */			\
+-	ENABLE_INTERRUPTS(kt_flags);				\
+-								\
+ 	if (thr) {						\
+ 		kt_inside_was =	kt_atomic32_cmpxchg_no_ktsan(	\
+ 					&thr->inside, 1, 0);	\
+@@ -90,6 +86,7 @@ kt_ctx_t kt_ctx;
+ 	}							\
+ 								\
+ exit:								\
++	ENABLE_INTERRUPTS(kt_flags);				\
+ /**/
+ 
+ void __init ktsan_init_early(void)
+@@ -103,7 +100,7 @@ void __init ktsan_init_early(void)
+ 	kt_tab_init(&ctx->test_tab, 13, sizeof(kt_tab_test_t), 20);
+ 	kt_thr_pool_init();
+ 	kt_cache_init(&ctx->percpu_sync_cache,
+-		      sizeof(kt_percpu_sync_t), 2000);
++		      sizeof(kt_percpu_sync_t), 20 * 1000);
+ }
+ 
+ void ktsan_init(void)
+@@ -137,6 +134,24 @@ void ktsan_init(void)
+ 	pr_err("ktsan: enabled.\n");
+ }
+ 
++void ktsan_print_diagnostics(void)
++{
++	ENTER(false);
++	LEAVE();
++
++	pr_err("#! ktsan runtime is %s!\n", event_handled ? "active" : "not active");
++	if (!event_handled) {
++		pr_err("  kt_ctx.enabled:      %s\n", (kt_ctx.enabled) ? "+" : "-");
++		pr_err("  !IN_INTERRUPT():     %s\n", (!IN_INTERRUPT()) ? "+" : "-");
++		pr_err("  current:             %s\n", (current) ? "+" : "-");
++		pr_err("  current->ktsan.thr : %s\n", (current->ktsan.thr) ? "+" : "-");
++		pr_err("  thr->cpu != NULL:    %s\n", (thr->cpu != NULL) ? "+" : "-");
++		pr_err("  kt_inside_was == 0:  %s\n", (kt_inside_was == 0) ? "+" : "-");
++		pr_err("Stack trace:\n");
++		kt_stack_print_current(_RET_IP_);
++	}
++}
++
+ /* FIXME(xairy): not sure if this is the best place for this
+    function, but it requires access to ENTER and LEAVE. */
+ void kt_tests_run(void)
