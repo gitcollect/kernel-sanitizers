@@ -13,8 +13,8 @@ frame_re = re.compile(
   '^ '                                +
   '(?P<prefix>[^\[]*)'                +
   '\[\<(?P<addr>[0-9A-Fa-f]+)\>\] '   +
-  '(\? )?'                            +
   '(?P<suffix>'                       +
+    '(\? )?'                          +
     '(?P<function>[^\+]+)'            +
     '\+'                              +
     '0x(?P<offset>[0-9A-Fa-f]+)'      +
