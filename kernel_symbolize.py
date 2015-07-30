@@ -10,7 +10,7 @@ time_re = re.compile(
 )
 
 frame_re = re.compile(
-  '^ '                                +
+  '^'                                +
   '(?P<prefix>[^\[]*)'                +
   '\[\<(?P<addr>[0-9A-Fa-f]+)\>\] '   +
   '(?P<suffix>'                       +
@@ -164,7 +164,7 @@ class ReportProcesser:
       fileline_parts = fileline.split(self.strip_path, 1)
       if len(fileline_parts) >= 2:
         fileline = fileline_parts[1].lstrip('/')
-    print ' %s[<%s>] %s %s' % (prefix, addr, suffix, fileline)
+    print '%s[<%s>] %s %s' % (prefix, addr, suffix, fileline)
 
   def PrintInlinedFrame(self, prefix, addr, func, fileline, suffix):
     if self.strip_path != None:
@@ -172,7 +172,7 @@ class ReportProcesser:
       if len(fileline_parts) >= 2:
         fileline = fileline_parts[1].lstrip('/')
     addr = '     inlined    ';
-    print ' %s[<%s>] %s %s %s' % (prefix, addr, suffix, func, fileline)
+    print '%s[<%s>] %s %s %s' % (prefix, addr, suffix, func, fileline)
 
   def Finalize(self):
     for module, symbolizer in self.module_symbolizers.items():
