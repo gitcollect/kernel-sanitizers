@@ -10,17 +10,18 @@ time_re = re.compile(
 )
 
 frame_re = re.compile(
-  '^'                                 +
-  '(?P<prefix>[^\[]*)'                +
-  '\[\<(?P<addr>[0-9A-Fa-f]+)\>\] '   +
-  '(?P<body>'                         +
-    '(\? )?'                          +
-    '(?P<function>[^\+]+)'            +
-    '\+'                              +
-    '0x(?P<offset>[0-9A-Fa-f]+)'      +
-    '/'                               +
-    '0x(?P<size>[0-9A-Fa-f]+)'        +
-    '( \[(?P<module>.+)\])?'          +
+  '^'                                  +
+  '(?P<prefix>[^\[\t]*)'               +
+  '(\[\<(?P<addr>[0-9A-Fa-f]+)\>\])?'  +
+  '( |\t)'                             +
+  '(?P<body>'                          +
+    '(\? )?'                           +
+    '(?P<function>[^\+]+)'             +
+    '\+'                               +
+    '0x(?P<offset>[0-9A-Fa-f]+)'       +
+    '/'                                +
+    '0x(?P<size>[0-9A-Fa-f]+)'         +
+    '( \[(?P<module>.+)\])?'           +
   ')$'
 )
 
@@ -164,6 +165,8 @@ class ReportProcesser:
       fileline_parts = fileline.split(self.strip_path, 1)
       if len(fileline_parts) >= 2:
         fileline = fileline_parts[1].lstrip('/')
+    if addr == None:
+        addr = '      none      ';
     print '%s[<%s>] %s %s' % (prefix, addr, body, fileline)
 
   def PrintInlinedFrame(self, prefix, addr, func, fileline, body):
