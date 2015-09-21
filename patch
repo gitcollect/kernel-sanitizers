@@ -1,0 +1,48 @@
+--- a/buildbot/slave/ktsan-x86-64/run.sh
++++ b/buildbot/slave/ktsan-x86-64/run.sh
+@@ -1,8 +1,11 @@
+ #!/bin/bash
+ 
+-GCC_PATH=~/gcc/install/bin/gcc
+-IMAGE=~/qemu/image/wheezy.img
+-BOOT_TIMEOUT=80
++set -eux
++
++QEMU=/usr/libexec/qemu-kvm
++GCC_PATH=/home/sanitizers/gcc-5.2.0/install/bin/gcc
++IMAGE=/home/sanitizers/qemu/image/wheezy.img
++BOOT_TIMEOUT=600
+ 
+ echo @@@BUILD_STEP build@@@
+ echo
+@@ -27,12 +30,12 @@ rm -f vm.log
+ 
+ BOOT_START=$(date +%s.%N)
+ 
+-qemu-system-x86_64 \
++$QEMU \
+        -hda image.img \
+        -m 20G \
+        -smp 4 \
+        -net user,hostfwd=tcp::10022-:22 \
+-       -net nic \
++       -net nic,vlan=0,model=e1000 \
+        -nographic \
+        -kernel ./arch/x86/boot/bzImage \
+        -append "console=ttyS0 root=/dev/sda debug earlyprintk=serial" \
+@@ -49,12 +52,12 @@ kill -0 $(cat vm.pid)
+ trap "kill $(cat vm.pid); cat vm.log; exit 1" EXIT
+ 
+ timeout $BOOT_TIMEOUT tail -n +0 -f vm.log | \
+-       grep -q --line-buffered "Starting.*sshd"
++       grep -q --line-buffered -m 1 "Starting.*sshd"
+ 
+ BOOT_FINISH=$(date +%s.%N)
+-BOOT_TIME=$(echo "$BOOT_FINISH - $BOOT_START" | bc)
++BOOT_TIME=$(echo "scale=2; ($BOOT_FINISH - $BOOT_START)/1" | bc)
+ 
+-echo @@@STEP_TEXT@boot time: $BOOT_TIME@@@
++echo @@@STEP_TEXT@time: $BOOT_TIME@@@
+ 
+ kill $(cat vm.pid)
+ 
