@@ -8,7 +8,7 @@ virtualenv --no-site-packages sandbox
 source ./sandbox/bin/activate
 easy_install buildbot
 
-buildslave create-master master
-buildslave start master
+buildbot create-master master
+buildbot start master
 
 deactivate
