@@ -1,0 +1,306 @@
+?
+==================================================================
+ThreadSanitizer: data-race in ondemand_readahead
+
+Write at 0xffff880281cc44a0 of size 8 by thread 2866 on CPU 2:
+ [<ffffffff811db799>] ondemand_readahead+0x189/0x3b0 mm/readahead.c:398
+ [<ffffffff811dbaf3>] page_cache_async_readahead+0x133/0x180 mm/readahead.c:548
+ [<     inline     >] do_generic_file_read mm/filemap.c:1524
+ [<ffffffff811c98d2>] generic_file_read_iter+0x642/0x880 mm/filemap.c:1759
+ [<     inline     >] do_iter_readv_writev fs/read_write.c:664
+ [<ffffffff8125bde9>] do_readv_writev+0x289/0x420 fs/read_write.c:808
+ [<ffffffff8125bfda>] vfs_readv+0x5a/0x80 fs/read_write.c:834
+ [<     inline     >] SYSC_preadv fs/read_write.c:912
+ [<ffffffff8125d627>] SyS_preadv+0x117/0x140 fs/read_write.c:898
+ [<ffffffff81ea9451>] entry_SYSCALL_64_fastpath+0x31/0x95 arch/x86/entry/entry_64.S:188
+
+Previous read at 0xffff880281cc44a0 of size 8 by thread 2824 on CPU 3:
+ [<ffffffff811db66c>] ondemand_readahead+0x5c/0x3b0 mm/readahead.c:396
+ [<ffffffff811dbaf3>] page_cache_async_readahead+0x133/0x180 mm/readahead.c:548
+ [<     inline     >] do_generic_file_read mm/filemap.c:1524
+ [<ffffffff811c98d2>] generic_file_read_iter+0x642/0x880 mm/filemap.c:1759
+ [<     inline     >] do_iter_readv_writev fs/read_write.c:664
+ [<ffffffff8125bde9>] do_readv_writev+0x289/0x420 fs/read_write.c:808
+ [<ffffffff8125bfda>] vfs_readv+0x5a/0x80 fs/read_write.c:834
+ [<     inline     >] SYSC_readv fs/read_write.c:860
+ [<ffffffff8125d2ff>] SyS_readv+0x6f/0x140 fs/read_write.c:852
+ [<ffffffff81ea9451>] entry_SYSCALL_64_fastpath+0x31/0x95 arch/x86/entry/entry_64.S:188
+
+Mutexes locked by thread 2824:
+Mutex 677801 is locked here:
+ [<ffffffff81ea5dc7>] mutex_lock+0x57/0x70 kernel/locking/mutex.c:108
+ [<ffffffff8128d129>] __fdget_pos+0x69/0x80 fs/file.c:749
+ [<     inline     >] fdget_pos fs/read_write.c:266
+ [<     inline     >] SYSC_readv fs/read_write.c:855
+ [<ffffffff8125d2ba>] SyS_readv+0x2a/0x140 fs/read_write.c:852
+ [<ffffffff81ea9451>] entry_SYSCALL_64_fastpath+0x31/0x95 arch/x86/entry/entry_64.S:188
+
+==================================================================
+
+?
+==================================================================
+ThreadSanitizer: data-race in SyS_get_robust_list
+
+Read of size 8 by thread T62 (K2831, CPU2):
+ [<     inlined    >] SyS_get_robust_list+0x9e/0xf0 SYSC_get_robust_list kernel/futex.c:2788
+ [<ffffffff8112fe6e>] SyS_get_robust_list+0x9e/0xf0 kernel/futex.c:2762
+ [<ffffffff81eb1eee>] entry_SYSCALL_64_fastpath+0x12/0x71 arch/x86/entry/entry_64.S:186
+
+Previous write of size 8 by thread T472 (K2716, CPU1):
+ [<     inlined    >] SyS_set_robust_list+0x54/0x80 SYSC_set_robust_list kernel/futex.c:2751
+ [<ffffffff8112fda4>] SyS_set_robust_list+0x54/0x80 kernel/futex.c:2740
+ [<ffffffff81eb1eee>] entry_SYSCALL_64_fastpath+0x12/0x71 arch/x86/entry/entry_64.S:186
+
+DBG: addr: ffff880195ce3b00
+DBG: first offset: 0, second offset: 0
+DBG: T62 clock: {T62: 1012782, T472: 5123666}
+DBG: T472 clock: {T472: 5124180}
+=================================================================
+
+TODO: annotate benign
+==================================================================
+ThreadSanitizer: data-race in pipe_write
+
+Write of size 4 by thread T210 (K7931):
+ [<ffffffff8126b1d7>] pipe_write+0x2f7/0x690 fs/pipe.c:432
+ [<     inlined    >] do_readv_writev+0x289/0x420 do_iter_readv_writev fs/read_write.c:664
+ [<ffffffff8125df59>] do_readv_writev+0x289/0x420 fs/read_write.c:808
+ [<ffffffff8125e1cd>] vfs_writev+0x5d/0x80 fs/read_write.c:847
+ [<     inlined    >] SyS_writev+0x6b/0x140 SYSC_writev fs/read_write.c:880
+ [<ffffffff8125f5ab>] SyS_writev+0x6b/0x140 fs/read_write.c:872
+ [<ffffffff81eaffee>] entry_SYSCALL_64_fastpath+0x12/0x71 arch/x86/entry/entry_64.S:186
+DBG: cpu = ffff88063fd1fe68
+DBG: cpu id = 2
+
+Previous read of size 4 by thread T582 (K8060):
+ [<     inlined    >] SyS_tee+0x140/0x490 opipe_prep fs/splice.c:1756
+ [<     inlined    >] SyS_tee+0x140/0x490 do_tee fs/splice.c:2002
+ [<     inlined    >] SyS_tee+0x140/0x490 SYSC_tee fs/splice.c:2026
+ [<ffffffff812af260>] SyS_tee+0x140/0x490 fs/splice.c:2011
+ [<ffffffff81eaffee>] entry_SYSCALL_64_fastpath+0x12/0x71 arch/x86/entry/entry_64.S:186
+DBG: cpu = ffff88063fd9fe68
+
+DBG: addr: ffff880192f12680
+DBG: first offset: 0, second offset: 0
+DBG: T210 clock: {T210: 8192887, T582: 3022709}
+DBG: T582 clock: {T582: 3023962}
+==================================================================
+
+TODO: annotate with READ_ONCE/WRITE_ONCE
+==================================================================
+ThreadSanitizer: data-race in shmem_fallocate
+
+Write of size 8 by thread T569 (K7558):
+ [<ffffffff811ec1ea>] shmem_fallocate+0x4ea/0x6b0 mm/shmem.c:2080
+ [<ffffffff81250b30>] vfs_fallocate+0x1e0/0x310 fs/open.c:303
+ [<     inlined    >] SyS_madvise+0x378/0x760 madvise_remove mm/madvise.c:326
+ [<     inlined    >] SyS_madvise+0x378/0x760 madvise_vma mm/madvise.c:378
+ [<     inlined    >] SyS_madvise+0x378/0x760 SYSC_madvise mm/madvise.c:528
+ [<ffffffff81221318>] SyS_madvise+0x378/0x760 mm/madvise.c:459
+ [<ffffffff81e957ee>] entry_SYSCALL_64_fastpath+0x12/0x71 arch/x86/entry/entry_64.S:186
+DBG: cpu = ffff88063fc1fe68
+DBG: cpu id = 0
+
+Previous read of size 8 by thread T527 (K7825):
+ [<ffffffff811ea7f4>] shmem_fault+0x64/0x300 mm/shmem.c:1296
+ [<ffffffff812047e9>] __do_fault+0xb9/0x130 mm/memory.c:2756
+ [<     inlined    >] handle_mm_fault+0x29d/0x1860 do_shared_fault mm/memory.c:3040
+ [<     inlined    >] handle_mm_fault+0x29d/0x1860 do_fault mm/memory.c:3115
+ [<     inlined    >] handle_mm_fault+0x29d/0x1860 handle_pte_fault mm/memory.c:3255
+ [<     inlined    >] handle_mm_fault+0x29d/0x1860 __handle_mm_fault mm/memory.c:3379
+ [<ffffffff812091ad>] handle_mm_fault+0x29d/0x1860 mm/memory.c:3408
+ [<ffffffff81075eaa>] __do_page_fault+0x1fa/0x550 arch/x86/mm/fault.c:1235
+ [<ffffffff810762a3>] trace_do_page_fault+0x63/0x160 arch/x86/mm/fault.c:1328
+ [<ffffffff8106e12c>] do_async_page_fault+0x2c/0xa0 arch/x86/kernel/kvm.c:264
+ [<ffffffff81e974b8>] async_page_fault+0x28/0x30 arch/x86/entry/entry_64.S:1081
+ [<ffffffff81e957ee>] entry_SYSCALL_64_fastpath+0x12/0x71 arch/x86/entry/entry_64.S:186
+DBG: cpu = 0
+
+DBG: addr: ffff8801d05107a8
+DBG: first offset: 0, second offset: 0
+DBG: T569 clock: {T569: 34513403, T527: 7681920}
+DBG: T527 clock: {T527: 7681960}
+==================================================================
+
+TODO: ask the developers
+==================================================================
+ThreadSanitizer: data-race in SyS_readv
+
+Write of size 8 by thread T340 (K7633):
+ [<     inlined    >] SyS_readv+0x88/0x140 file_pos_write fs/read_write.c:559
+ [<     inlined    >] SyS_readv+0x88/0x140 SYSC_readv fs/read_write.c:862
+ [<ffffffff812567b8>] SyS_readv+0x88/0x140 fs/read_write.c:852
+ [<ffffffff81e957ee>] entry_SYSCALL_64_fastpath+0x12/0x71 arch/x86/entry/entry_64.S:186
+DBG: cpu = ffff88063fc9fe68
+DBG: cpu id = 1
+
+Previous write of size 8 by thread T336 (K7629):
+ [<     inlined    >] SyS_writev+0x88/0x140 file_pos_write fs/read_write.c:559
+ [<     inlined    >] SyS_writev+0x88/0x140 SYSC_writev fs/read_write.c:882
+ [<ffffffff812568f8>] SyS_writev+0x88/0x140 fs/read_write.c:872
+ [<ffffffff81e957ee>] entry_SYSCALL_64_fastpath+0x12/0x71 arch/x86/entry/entry_64.S:186
+DBG: cpu = 0
+
+DBG: addr: ffff8800b9e20170
+DBG: first offset: 0, second offset: 0
+DBG: T340 clock: {T340: 12438046, T336: 14943936}
+DBG: T336 clock: {T336: 14944110}
+==================================================================
+
+?
+==================================================================
+ThreadSanitizer: data-race in __dequeue_signal
+
+Read of size 4 by thread T180 (K7467):
+ [<     inlined    >] __dequeue_signal+0xf2/0x380 collect_signal kernel/signal.c:550
+ [<ffffffff8109a102>] __dequeue_signal+0xf2/0x380 kernel/signal.c:593
+ [<ffffffff8109a4a5>] dequeue_signal+0x115/0x250 kernel/signal.c:614
+ [<ffffffff8109eb52>] get_signal+0x172/0xa30 kernel/signal.c:2246
+ [<ffffffff8100617c>] do_signal+0x2c/0xaf0 arch/x86/kernel/signal.c:708
+ [<ffffffff81006cbd>] do_notify_resume+0x7d/0x80 arch/x86/kernel/signal.c:753
+ [<ffffffff81e959bc>] int_signal+0x12/0x17 arch/x86/entry/entry_64.S:326
+DBG: cpu = ffff88063fd9fe68
+DBG: cpu id = 3
+
+Previous write of size 8 by thread T191 (K7469):
+ [<     inlined    >] kmem_cache_free+0x99/0x610 __cache_free mm/slab.c:3383
+ [<ffffffff81239159>] kmem_cache_free+0x99/0x610 mm/slab.c:3561
+ [<ffffffff810993b8>] __sigqueue_free.part.16+0x68/0x80 kernel/signal.c:401
+ [<     inlined    >] __dequeue_signal+0x298/0x380 __sigqueue_free kernel/signal.c:588
+ [<     inlined    >] __dequeue_signal+0x298/0x380 collect_signal kernel/signal.c:563
+ [<ffffffff8109a2a8>] __dequeue_signal+0x298/0x380 kernel/signal.c:593
+ [<ffffffff8109a4a5>] dequeue_signal+0x115/0x250 kernel/signal.c:614
+ [<ffffffff8109eb52>] get_signal+0x172/0xa30 kernel/signal.c:2246
+ [<ffffffff8100617c>] do_signal+0x2c/0xaf0 arch/x86/kernel/signal.c:708
+ [<ffffffff81006cbd>] do_notify_resume+0x7d/0x80 arch/x86/kernel/signal.c:753
+ [<ffffffff81e959bc>] int_signal+0x12/0x17 arch/x86/entry/entry_64.S:326
+DBG: cpu = ffff88063fc9fe68
+
+DBG: addr: ffff8800b6e43998
+DBG: first offset: 0, second offset: 0
+DBG: T180 clock: {T180: 1452537, T191: 1504297}
+DBG: T191 clock: {T191: 1504445}
+==================================================================
+...
+==================================================================
+ThreadSanitizer: data-race in __sigqueue_free.part.16
+
+Read of size 8 by thread T180 (K7467):
+ [<ffffffff81099372>] __sigqueue_free.part.16+0x22/0x80 kernel/signal.c:399
+ [<     inlined    >] __dequeue_signal+0x298/0x380 __sigqueue_free kernel/signal.c:588
+ [<     inlined    >] __dequeue_signal+0x298/0x380 collect_signal kernel/signal.c:563
+ [<ffffffff8109a2a8>] __dequeue_signal+0x298/0x380 kernel/signal.c:593
+ [<ffffffff8109a4a5>] dequeue_signal+0x115/0x250 kernel/signal.c:614
+ [<ffffffff8109eb52>] get_signal+0x172/0xa30 kernel/signal.c:2246
+ [<ffffffff8100617c>] do_signal+0x2c/0xaf0 arch/x86/kernel/signal.c:708
+ [<ffffffff81006cbd>] do_notify_resume+0x7d/0x80 arch/x86/kernel/signal.c:753
+ [<ffffffff81e959bc>] int_signal+0x12/0x17 arch/x86/entry/entry_64.S:326
+DBG: cpu = ffff88063fd9fe68
+DBG: cpu id = 3
+
+Previous write of size 8 by thread T191 (K7469):
+ [<     inlined    >] kmem_cache_free+0x99/0x610 __cache_free mm/slab.c:3383
+ [<ffffffff81239159>] kmem_cache_free+0x99/0x610 mm/slab.c:3561
+ [<ffffffff810993b8>] __sigqueue_free.part.16+0x68/0x80 kernel/signal.c:401
+ [<     inlined    >] __dequeue_signal+0x298/0x380 __sigqueue_free kernel/signal.c:588
+ [<     inlined    >] __dequeue_signal+0x298/0x380 collect_signal kernel/signal.c:563
+ [<ffffffff8109a2a8>] __dequeue_signal+0x298/0x380 kernel/signal.c:593
+ [<ffffffff8109a4a5>] dequeue_signal+0x115/0x250 kernel/signal.c:614
+ [<ffffffff8109eb52>] get_signal+0x172/0xa30 kernel/signal.c:2246
+ [<ffffffff8100617c>] do_signal+0x2c/0xaf0 arch/x86/kernel/signal.c:708
+ [<ffffffff81006cbd>] do_notify_resume+0x7d/0x80 arch/x86/kernel/signal.c:753
+ [<ffffffff81e959bc>] int_signal+0x12/0x17 arch/x86/entry/entry_64.S:326
+DBG: cpu = ffff88063fc9fe68
+
+DBG: addr: ffff8800b6e43a18
+DBG: first offset: 0, second offset: 0
+DBG: T180 clock: {T180: 1452550, T191: 1504297}
+DBG: T191 clock: {T191: 1504461}
+==================================================================
+
+?
+==================================================================
+ThreadSanitizer: data-race in tcp_cleanup_rbuf
+
+Read of size 1 by thread T258 (K3071):
+ [<ffffffff81becd9e>] tcp_cleanup_rbuf+0xbe/0x200 net/ipv4/tcp.c:1392
+ [<ffffffff81bef6af>] tcp_recvmsg+0x7af/0x1170 net/ipv4/tcp.c:1878
+ [<ffffffff81c4017a>] inet_recvmsg+0x12a/0x160 net/ipv4/af_inet.c:764
+ [<     inlined    >] sock_recvmsg+0x6a/0x90 sock_recvmsg_nosec net/socket.c:712
+ [<ffffffff81b22dda>] sock_recvmsg+0x6a/0x90 net/socket.c:720
+ [<ffffffff81b22ef9>] sock_read_iter+0xf9/0x150 net/socket.c:797
+ [<     inlined    >] __vfs_read+0x199/0x1d0 new_sync_read fs/read_write.c:422
+ [<ffffffff81254359>] __vfs_read+0x199/0x1d0 fs/read_write.c:434
+ [<ffffffff81254c67>] vfs_read+0xb7/0x1e0 fs/read_write.c:454
+ [<     inlined    >] SyS_read+0x6b/0xd0 SYSC_read fs/read_write.c:569
+ [<ffffffff8125634b>] SyS_read+0x6b/0xd0 fs/read_write.c:562
+ [<ffffffff81e9592e>] entry_SYSCALL_64_fastpath+0x12/0x71 arch/x86/entry/entry_64.S:186
+DBG: cpu = ffff88063fd9fe68
+DBG: cpu id = 3
+
+Previous write of size 1 by thread T10 (K0):
+ [<ffffffff81c11d25>] tcp_delack_timer+0x45/0x110 net/ipv4/tcp_timer.c:262
+ [<ffffffff81109eec>] call_timer_fn+0x4c/0x1c0 kernel/time/timer.c:1155
+ [<     inlined    >] run_timer_softirq+0x318/0x500 __run_timers kernel/time/timer.c:1231
+ [<ffffffff8110c478>] run_timer_softirq+0x318/0x500 kernel/time/timer.c:1414
+ [<ffffffff8108f18d>] __do_softirq+0xad/0x2d0 kernel/softirq.c:273
+ [<ffffffff81e967cb>] trace_apic_timer_interrupt+0x6b/0x70 arch/x86/entry/entry_64.S:782
+ [<ffffffff810161ef>] arch_cpu_idle+0x1f/0x30 arch/x86/kernel/process.c:288
+ [<ffffffff810d92f3>] default_idle_call+0x43/0x60 kernel/sched/idle.c:89
+DBG: cpu = ffff88063fc9fe68
+
+DBG: addr: ffff8801d057051b
+DBG: first offset: 3, second offset: 3
+DBG: T258 clock: {T258: 2724020, T10: 91298507}
+DBG: T10 clock: {T10: 91298705}
+==================================================================
+
+Another report with radix tree from filemap.c
+Not clear how to fix, but seems harmless
+==================================================================
+ThreadSanitizer: data-race in radix_tree_next_chunk
+
+Read of size 4 by thread T149 (K671):
+ [<ffffffff8152c25f>] radix_tree_next_chunk+0x3f/0x350 lib/radix-tree.c:759
+ [<ffffffff811c4241>] find_get_pages_tag+0x1f1/0x280 mm/filemap.c:1399
+ [<ffffffff811d84ae>] pagevec_lookup_tag+0x3e/0x70 mm/swap.c:1133
+ [<ffffffff8132376b>] mpage_prepare_extent_to_map+0x1bb/0x4e0 fs/ext4/inode.c:2292
+ [<ffffffff8132a67a>] ext4_writepages+0x64a/0x1480 fs/ext4/inode.c:2505
+ [<ffffffff811d68d3>] do_writepages+0x53/0x80 mm/page-writeback.c:2332
+ [<ffffffff812966ef>] __writeback_single_inode+0x7f/0x510 fs/fs-writeback.c:1258 (discriminator 3)
+ [<ffffffff81296f4d>] writeback_sb_inodes+0x3cd/0x5d0 fs/fs-writeback.c:1515
+ [<ffffffff81297573>] wb_writeback+0x143/0x410 fs/fs-writeback.c:1663
+ [<     inlined    >] wb_workfn+0x203/0x760 wb_do_writeback fs/fs-writeback.c:1800
+ [<ffffffff8129b953>] wb_workfn+0x203/0x760 fs/fs-writeback.c:1851
+ [<ffffffff810af4fd>] process_one_work+0x26d/0x6f0 kernel/workqueue.c:2036
+ [<ffffffff810b0619>] worker_thread+0xb9/0x700 kernel/workqueue.c:2170
+ [<ffffffff810b8951>] kthread+0x161/0x180 kernel/kthread.c:207
+ [<ffffffff81e8c71f>] ret_from_fork+0x3f/0x70 arch/x86/entry/entry_64.S:526
+DBG: cpu = ffff88063fd1fe68
+DBG: cpu id = 2
+
+Previous write of size 4 by thread T530 (K7239):
+ [<     inlined    >] radix_tree_tag_set+0x109/0x130 root_tag_set lib/radix-tree.c:108
+ [<ffffffff8152bac9>] radix_tree_tag_set+0x109/0x130 lib/radix-tree.c:618
+ [<ffffffff812a686c>] __set_page_dirty.constprop.42+0x7c/0x110 fs/buffer.c:642
+ [<ffffffff812a69bb>] mark_buffer_dirty+0xbb/0x190 fs/buffer.c:1185
+ [<ffffffff812a704f>] __block_commit_write.isra.23+0xaf/0xf0 fs/buffer.c:2006
+ [<ffffffff812a82c4>] block_write_end+0x44/0xa0 fs/buffer.c:2084
+ [<ffffffff812a838e>] generic_write_end+0x6e/0x110 fs/buffer.c:2098
+ [<ffffffff8132d66a>] ext4_da_write_end+0x17a/0x3d0 fs/ext4/inode.c:2776
+ [<ffffffff811c2e55>] generic_perform_write+0x1a5/0x290 mm/filemap.c:2502
+ [<ffffffff811c611d>] __generic_file_write_iter+0x25d/0x2e0 mm/filemap.c:2620
+ [<ffffffff8131b904>] ext4_file_write_iter+0x254/0x740 fs/ext4/file.c:170
+ [<     inlined    >] __vfs_write+0x19c/0x1e0 new_sync_write fs/read_write.c:478
+ [<ffffffff812529ec>] __vfs_write+0x19c/0x1e0 fs/read_write.c:491
+ [<ffffffff81253346>] vfs_write+0xf6/0x2a0 fs/read_write.c:538
+ [<     inlined    >] SyS_write+0x6b/0xd0 SYSC_write fs/read_write.c:585
+ [<ffffffff812548db>] SyS_write+0x6b/0xd0 fs/read_write.c:577
+ [<ffffffff81e8c32e>] entry_SYSCALL_64_fastpath+0x12/0x71 arch/x86/entry/entry_64.S:186
+DBG: cpu = 0
+
+DBG: addr: ffff8800bb460de4
+DBG: first offset: 4, second offset: 4
+DBG: T149 clock: {T149: 9867885, T530: 4667258}
+DBG: T530 clock: {T530: 4667561}
+==================================================================

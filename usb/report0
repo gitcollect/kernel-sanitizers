@@ -1,0 +1,1852 @@
+early console in setup code
+early console in decompress_kernel
+input_data: 0x000000000322d26e
+input_len: 0x0000000001008549
+output: 0x0000000001000000
+output_len: 0x0000000003221a40
+run_size: 0x000000000335a000
+
+Decompressing Linux... Parsing ELF... done.
+Booting the kernel.
+Initializing cgroup subsys cpuset
+Initializing cgroup subsys cpu
+Initializing cgroup subsys cpuacct
+Linux version 4.3.0-rc4-kasan (XXX) (gcc version 6.0.0 20150831 (experimental) (GCC) ) #42 SMP Sat Oct 10 19:45:31 CEST 2015
+Command line: console=ttyS0 root=/dev/sda debug earlyprintk=serial
+x86/fpu: Legacy x87 FPU detected.
+x86/fpu: Using 'lazy' FPU context switches.
+e820: BIOS-provided physical RAM map:
+BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+BIOS-e820: [mem 0x0000000000100000-0x000000007ffdffff] usable
+BIOS-e820: [mem 0x000000007ffe0000-0x000000007fffffff] reserved
+BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+bootconsole [earlyser0] enabled
+NX (Execute Disable) protection: active
+SMBIOS 2.8 present.
+DMI: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.7.5-0-ge51488c-20140602_164612-nilsson.home.kraxel.org 04/01/2014
+Hypervisor detected: KVM
+e820: update [mem 0x00000000-0x00000fff] usable ==> reserved
+e820: remove [mem 0x000a0000-0x000fffff] usable
+e820: last_pfn = 0x7ffe0 max_arch_pfn = 0x400000000
+MTRR default type: write-back
+MTRR fixed ranges enabled:
+  00000-9FFFF write-back
+  A0000-BFFFF uncachable
+  C0000-FFFFF write-protect
+MTRR variable ranges enabled:
+  0 base 0080000000 mask FF80000000 uncachable
+  1 disabled
+  2 disabled
+  3 disabled
+  4 disabled
+  5 disabled
+  6 disabled
+  7 disabled
+x86/PAT: PAT not supported by CPU.
+found SMP MP-table at [mem 0x000f0e90-0x000f0e9f] mapped at [ffff8800000f0e90]
+Scanning 1 areas for low memory corruption
+Base memory trampoline at [ffff880000099000] 99000 size 24576
+init_memory_mapping: [mem 0x00000000-0x000fffff]
+ [mem 0x00000000-0x000fffff] page 4k
+BRK [0x03f35000, 0x03f35fff] PGTABLE
+BRK [0x03f36000, 0x03f36fff] PGTABLE
+BRK [0x03f37000, 0x03f37fff] PGTABLE
+init_memory_mapping: [mem 0x7fc00000-0x7fdfffff]
+ [mem 0x7fc00000-0x7fdfffff] page 2M
+BRK [0x03f38000, 0x03f38fff] PGTABLE
+init_memory_mapping: [mem 0x60000000-0x7fbfffff]
+ [mem 0x60000000-0x7fbfffff] page 2M
+init_memory_mapping: [mem 0x40000000-0x5fffffff]
+ [mem 0x40000000-0x5fffffff] page 2M
+init_memory_mapping: [mem 0x00100000-0x3fffffff]
+ [mem 0x00100000-0x001fffff] page 4k
+ [mem 0x00200000-0x3fffffff] page 2M
+init_memory_mapping: [mem 0x7fe00000-0x7ffdffff]
+ [mem 0x7fe00000-0x7ffdffff] page 4k
+BRK [0x03f39000, 0x03f39fff] PGTABLE
+ACPI: Early table checksum verification disabled
+ACPI: RSDP 0x00000000000F0C50 000014 (v00 BOCHS )
+ACPI: RSDT 0x000000007FFE1896 000034 (v01 BOCHS  BXPCRSDT 00000001 BXPC 00000001)
+ACPI: FACP 0x000000007FFE0B37 000074 (v01 BOCHS  BXPCFACP 00000001 BXPC 00000001)
+ACPI: DSDT 0x000000007FFE0040 000AF7 (v01 BOCHS  BXPCDSDT 00000001 BXPC 00000001)
+ACPI: FACS 0x000000007FFE0000 000040
+ACPI: SSDT 0x000000007FFE0BAB 000C33 (v01 BOCHS  BXPCSSDT 00000001 BXPC 00000001)
+ACPI: APIC 0x000000007FFE17DE 000080 (v01 BOCHS  BXPCAPIC 00000001 BXPC 00000001)
+ACPI: HPET 0x000000007FFE185E 000038 (v01 BOCHS  BXPCHPET 00000001 BXPC 00000001)
+ACPI: Local APIC address 0xfee00000
+No NUMA configuration found
+Faking a node at [mem 0x0000000000000000-0x000000007ffdffff]
+NODE_DATA(0) allocated [mem 0x7ffdc000-0x7ffdffff]
+kvm-clock: Using msrs 4b564d01 and 4b564d00
+kvm-clock: cpu 0, msr 0:7ffdb001, primary cpu clock
+clocksource: kvm-clock: mask: 0xffffffffffffffff max_cycles: 0x1cd42e4dffb, max_idle_ns: 881590591483 ns
+ [ffffea0000000000-ffffea0001ffffff] PMD -> [ffff88007d600000-ffff88007f5fffff] on node 0
+Zone ranges:
+  DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+  DMA32    [mem 0x0000000001000000-0x000000007ffdffff]
+  Normal   empty
+Movable zone start for each node
+Early memory node ranges
+  node   0: [mem 0x0000000000001000-0x000000000009efff]
+  node   0: [mem 0x0000000000100000-0x000000007ffdffff]
+Initmem setup node 0 [mem 0x0000000000001000-0x000000007ffdffff]
+On node 0 totalpages: 524158
+  DMA zone: 64 pages used for memmap
+  DMA zone: 21 pages reserved
+  DMA zone: 3998 pages, LIFO batch:0
+  DMA32 zone: 8128 pages used for memmap
+  DMA32 zone: 520160 pages, LIFO batch:31
+ [ffffed0000000000-ffffed00001fffff] PMD -> [ffff88007fc00000-ffff88007fdfffff] on node -1
+ [ffffed0000200000-ffffed00003fffff] PMD -> [ffff88007f800000-ffff88007f9fffff] on node -1
+ [ffffed0000400000-ffffed00005fffff] PMD -> [ffff88007d400000-ffff88007d5fffff] on node -1
+ [ffffed0000600000-ffffed00007fffff] PMD -> [ffff88007d200000-ffff88007d3fffff] on node -1
+ [ffffed0000800000-ffffed00009fffff] PMD -> [ffff88007d000000-ffff88007d1fffff] on node -1
+ [ffffed0000a00000-ffffed0000bfffff] PMD -> [ffff88007ce00000-ffff88007cffffff] on node -1
+ [ffffed0000c00000-ffffed0000dfffff] PMD -> [ffff88007cc00000-ffff88007cdfffff] on node -1
+ [ffffed0000e00000-ffffed0000ffffff] PMD -> [ffff88007ca00000-ffff88007cbfffff] on node -1
+ [ffffed0001000000-ffffed00011fffff] PMD -> [ffff88007c800000-ffff88007c9fffff] on node -1
+ [ffffed0001200000-ffffed00013fffff] PMD -> [ffff88007c600000-ffff88007c7fffff] on node -1
+ [ffffed0001400000-ffffed00015fffff] PMD -> [ffff88007c400000-ffff88007c5fffff] on node -1
+ [ffffed0001600000-ffffed00017fffff] PMD -> [ffff88007c200000-ffff88007c3fffff] on node -1
+ [ffffed0001800000-ffffed00019fffff] PMD -> [ffff88007c000000-ffff88007c1fffff] on node -1
+ [ffffed0001a00000-ffffed0001bfffff] PMD -> [ffff88007be00000-ffff88007bffffff] on node -1
+ [ffffed0001c00000-ffffed0001dfffff] PMD -> [ffff88007bc00000-ffff88007bdfffff] on node -1
+ [ffffed0001e00000-ffffed0001ffffff] PMD -> [ffff88007ba00000-ffff88007bbfffff] on node -1
+ [ffffed0002000000-ffffed00021fffff] PMD -> [ffff88007b800000-ffff88007b9fffff] on node -1
+ [ffffed0002200000-ffffed00023fffff] PMD -> [ffff88007b600000-ffff88007b7fffff] on node -1
+ [ffffed0002400000-ffffed00025fffff] PMD -> [ffff88007b400000-ffff88007b5fffff] on node -1
+ [ffffed0002600000-ffffed00027fffff] PMD -> [ffff88007b200000-ffff88007b3fffff] on node -1
+ [ffffed0002800000-ffffed00029fffff] PMD -> [ffff88007b000000-ffff88007b1fffff] on node -1
+ [ffffed0002a00000-ffffed0002bfffff] PMD -> [ffff88007ae00000-ffff88007affffff] on node -1
+ [ffffed0002c00000-ffffed0002dfffff] PMD -> [ffff88007ac00000-ffff88007adfffff] on node -1
+ [ffffed0002e00000-ffffed0002ffffff] PMD -> [ffff88007aa00000-ffff88007abfffff] on node -1
+ [ffffed0003000000-ffffed00031fffff] PMD -> [ffff88007a800000-ffff88007a9fffff] on node -1
+ [ffffed0003200000-ffffed00033fffff] PMD -> [ffff88007a600000-ffff88007a7fffff] on node -1
+ [ffffed0003400000-ffffed00035fffff] PMD -> [ffff88007a400000-ffff88007a5fffff] on node -1
+ [ffffed0003600000-ffffed00037fffff] PMD -> [ffff88007a200000-ffff88007a3fffff] on node -1
+ [ffffed0003800000-ffffed00039fffff] PMD -> [ffff88007a000000-ffff88007a1fffff] on node -1
+ [ffffed0003a00000-ffffed0003bfffff] PMD -> [ffff880079e00000-ffff880079ffffff] on node -1
+ [ffffed0003c00000-ffffed0003dfffff] PMD -> [ffff880079c00000-ffff880079dfffff] on node -1
+ [ffffed0003e00000-ffffed0003ffffff] PMD -> [ffff880079a00000-ffff880079bfffff] on node -1
+ [ffffed0004000000-ffffed00041fffff] PMD -> [ffff880079800000-ffff8800799fffff] on node -1
+ [ffffed0004200000-ffffed00043fffff] PMD -> [ffff880079600000-ffff8800797fffff] on node -1
+ [ffffed0004400000-ffffed00045fffff] PMD -> [ffff880079400000-ffff8800795fffff] on node -1
+ [ffffed0004600000-ffffed00047fffff] PMD -> [ffff880079200000-ffff8800793fffff] on node -1
+ [ffffed0004800000-ffffed00049fffff] PMD -> [ffff880079000000-ffff8800791fffff] on node -1
+ [ffffed0004a00000-ffffed0004bfffff] PMD -> [ffff880078e00000-ffff880078ffffff] on node -1
+ [ffffed0004c00000-ffffed0004dfffff] PMD -> [ffff880078c00000-ffff880078dfffff] on node -1
+ [ffffed0004e00000-ffffed0004ffffff] PMD -> [ffff880078a00000-ffff880078bfffff] on node -1
+ [ffffed0005000000-ffffed00051fffff] PMD -> [ffff880078800000-ffff8800789fffff] on node -1
+ [ffffed0005200000-ffffed00053fffff] PMD -> [ffff880078600000-ffff8800787fffff] on node -1
+ [ffffed0005400000-ffffed00055fffff] PMD -> [ffff880078400000-ffff8800785fffff] on node -1
+ [ffffed0005600000-ffffed00057fffff] PMD -> [ffff880078200000-ffff8800783fffff] on node -1
+ [ffffed0005800000-ffffed00059fffff] PMD -> [ffff880078000000-ffff8800781fffff] on node -1
+ [ffffed0005a00000-ffffed0005bfffff] PMD -> [ffff880077e00000-ffff880077ffffff] on node -1
+ [ffffed0005c00000-ffffed0005dfffff] PMD -> [ffff880077c00000-ffff880077dfffff] on node -1
+ [ffffed0005e00000-ffffed0005ffffff] PMD -> [ffff880077a00000-ffff880077bfffff] on node -1
+ [ffffed0006000000-ffffed00061fffff] PMD -> [ffff880077800000-ffff8800779fffff] on node -1
+ [ffffed0006200000-ffffed00063fffff] PMD -> [ffff880077600000-ffff8800777fffff] on node -1
+ [ffffed0006400000-ffffed00065fffff] PMD -> [ffff880077400000-ffff8800775fffff] on node -1
+ [ffffed0006600000-ffffed00067fffff] PMD -> [ffff880077200000-ffff8800773fffff] on node -1
+ [ffffed0006800000-ffffed00069fffff] PMD -> [ffff880077000000-ffff8800771fffff] on node -1
+ [ffffed0006a00000-ffffed0006bfffff] PMD -> [ffff880076e00000-ffff880076ffffff] on node -1
+ [ffffed0006c00000-ffffed0006dfffff] PMD -> [ffff880076c00000-ffff880076dfffff] on node -1
+ [ffffed0006e00000-ffffed0006ffffff] PMD -> [ffff880076a00000-ffff880076bfffff] on node -1
+ [ffffed0007000000-ffffed00071fffff] PMD -> [ffff880076800000-ffff8800769fffff] on node -1
+ [ffffed0007200000-ffffed00073fffff] PMD -> [ffff880076600000-ffff8800767fffff] on node -1
+ [ffffed0007400000-ffffed00075fffff] PMD -> [ffff880076400000-ffff8800765fffff] on node -1
+ [ffffed0007600000-ffffed00077fffff] PMD -> [ffff880076200000-ffff8800763fffff] on node -1
+ [ffffed0007800000-ffffed00079fffff] PMD -> [ffff880076000000-ffff8800761fffff] on node -1
+ [ffffed0007a00000-ffffed0007bfffff] PMD -> [ffff880075e00000-ffff880075ffffff] on node -1
+ [ffffed0007c00000-ffffed0007dfffff] PMD -> [ffff880075c00000-ffff880075dfffff] on node -1
+ [ffffed0007e00000-ffffed0007ffffff] PMD -> [ffff880075a00000-ffff880075bfffff] on node -1
+ [ffffed0008000000-ffffed00081fffff] PMD -> [ffff880075800000-ffff8800759fffff] on node -1
+ [ffffed0008200000-ffffed00083fffff] PMD -> [ffff880075600000-ffff8800757fffff] on node -1
+ [ffffed0008400000-ffffed00085fffff] PMD -> [ffff880075400000-ffff8800755fffff] on node -1
+ [ffffed0008600000-ffffed00087fffff] PMD -> [ffff880075200000-ffff8800753fffff] on node -1
+ [ffffed0008800000-ffffed00089fffff] PMD -> [ffff880075000000-ffff8800751fffff] on node -1
+ [ffffed0008a00000-ffffed0008bfffff] PMD -> [ffff880074e00000-ffff880074ffffff] on node -1
+ [ffffed0008c00000-ffffed0008dfffff] PMD -> [ffff880074c00000-ffff880074dfffff] on node -1
+ [ffffed0008e00000-ffffed0008ffffff] PMD -> [ffff880074a00000-ffff880074bfffff] on node -1
+ [ffffed0009000000-ffffed00091fffff] PMD -> [ffff880074800000-ffff8800749fffff] on node -1
+ [ffffed0009200000-ffffed00093fffff] PMD -> [ffff880074600000-ffff8800747fffff] on node -1
+ [ffffed0009400000-ffffed00095fffff] PMD -> [ffff880074400000-ffff8800745fffff] on node -1
+ [ffffed0009600000-ffffed00097fffff] PMD -> [ffff880074200000-ffff8800743fffff] on node -1
+ [ffffed0009800000-ffffed00099fffff] PMD -> [ffff880074000000-ffff8800741fffff] on node -1
+ [ffffed0009a00000-ffffed0009bfffff] PMD -> [ffff880073e00000-ffff880073ffffff] on node -1
+ [ffffed0009c00000-ffffed0009dfffff] PMD -> [ffff880073c00000-ffff880073dfffff] on node -1
+ [ffffed0009e00000-ffffed0009ffffff] PMD -> [ffff880073a00000-ffff880073bfffff] on node -1
+ [ffffed000a000000-ffffed000a1fffff] PMD -> [ffff880073800000-ffff8800739fffff] on node -1
+ [ffffed000a200000-ffffed000a3fffff] PMD -> [ffff880073600000-ffff8800737fffff] on node -1
+ [ffffed000a400000-ffffed000a5fffff] PMD -> [ffff880073400000-ffff8800735fffff] on node -1
+ [ffffed000a600000-ffffed000a7fffff] PMD -> [ffff880073200000-ffff8800733fffff] on node -1
+ [ffffed000a800000-ffffed000a9fffff] PMD -> [ffff880073000000-ffff8800731fffff] on node -1
+ [ffffed000aa00000-ffffed000abfffff] PMD -> [ffff880072e00000-ffff880072ffffff] on node -1
+ [ffffed000ac00000-ffffed000adfffff] PMD -> [ffff880072c00000-ffff880072dfffff] on node -1
+ [ffffed000ae00000-ffffed000affffff] PMD -> [ffff880072a00000-ffff880072bfffff] on node -1
+ [ffffed000b000000-ffffed000b1fffff] PMD -> [ffff880072800000-ffff8800729fffff] on node -1
+ [ffffed000b200000-ffffed000b3fffff] PMD -> [ffff880072600000-ffff8800727fffff] on node -1
+ [ffffed000b400000-ffffed000b5fffff] PMD -> [ffff880072400000-ffff8800725fffff] on node -1
+ [ffffed000b600000-ffffed000b7fffff] PMD -> [ffff880072200000-ffff8800723fffff] on node -1
+ [ffffed000b800000-ffffed000b9fffff] PMD -> [ffff880072000000-ffff8800721fffff] on node -1
+ [ffffed000ba00000-ffffed000bbfffff] PMD -> [ffff880071e00000-ffff880071ffffff] on node -1
+ [ffffed000bc00000-ffffed000bdfffff] PMD -> [ffff880071c00000-ffff880071dfffff] on node -1
+ [ffffed000be00000-ffffed000bffffff] PMD -> [ffff880071a00000-ffff880071bfffff] on node -1
+ [ffffed000c000000-ffffed000c1fffff] PMD -> [ffff880071800000-ffff8800719fffff] on node -1
+ [ffffed000c200000-ffffed000c3fffff] PMD -> [ffff880071600000-ffff8800717fffff] on node -1
+ [ffffed000c400000-ffffed000c5fffff] PMD -> [ffff880071400000-ffff8800715fffff] on node -1
+ [ffffed000c600000-ffffed000c7fffff] PMD -> [ffff880071200000-ffff8800713fffff] on node -1
+ [ffffed000c800000-ffffed000c9fffff] PMD -> [ffff880071000000-ffff8800711fffff] on node -1
+ [ffffed000ca00000-ffffed000cbfffff] PMD -> [ffff880070e00000-ffff880070ffffff] on node -1
+ [ffffed000cc00000-ffffed000cdfffff] PMD -> [ffff880070c00000-ffff880070dfffff] on node -1
+ [ffffed000ce00000-ffffed000cffffff] PMD -> [ffff880070a00000-ffff880070bfffff] on node -1
+ [ffffed000d000000-ffffed000d1fffff] PMD -> [ffff880070800000-ffff8800709fffff] on node -1
+ [ffffed000d200000-ffffed000d3fffff] PMD -> [ffff880070600000-ffff8800707fffff] on node -1
+ [ffffed000d400000-ffffed000d5fffff] PMD -> [ffff880070400000-ffff8800705fffff] on node -1
+ [ffffed000d600000-ffffed000d7fffff] PMD -> [ffff880070200000-ffff8800703fffff] on node -1
+ [ffffed000d800000-ffffed000d9fffff] PMD -> [ffff880070000000-ffff8800701fffff] on node -1
+ [ffffed000da00000-ffffed000dbfffff] PMD -> [ffff88006fe00000-ffff88006fffffff] on node -1
+ [ffffed000dc00000-ffffed000ddfffff] PMD -> [ffff88006fc00000-ffff88006fdfffff] on node -1
+ [ffffed000de00000-ffffed000dffffff] PMD -> [ffff88006fa00000-ffff88006fbfffff] on node -1
+ [ffffed000e000000-ffffed000e1fffff] PMD -> [ffff88006f800000-ffff88006f9fffff] on node -1
+ [ffffed000e200000-ffffed000e3fffff] PMD -> [ffff88006f600000-ffff88006f7fffff] on node -1
+ [ffffed000e400000-ffffed000e5fffff] PMD -> [ffff88006f400000-ffff88006f5fffff] on node -1
+ [ffffed000e600000-ffffed000e7fffff] PMD -> [ffff88006f200000-ffff88006f3fffff] on node -1
+ [ffffed000e800000-ffffed000e9fffff] PMD -> [ffff88006f000000-ffff88006f1fffff] on node -1
+ [ffffed000ea00000-ffffed000ebfffff] PMD -> [ffff88006ee00000-ffff88006effffff] on node -1
+ [ffffed000ec00000-ffffed000edfffff] PMD -> [ffff88006ec00000-ffff88006edfffff] on node -1
+ [ffffed000ee00000-ffffed000effffff] PMD -> [ffff88006ea00000-ffff88006ebfffff] on node -1
+ [ffffed000f000000-ffffed000f1fffff] PMD -> [ffff88006e800000-ffff88006e9fffff] on node -1
+ [ffffed000f200000-ffffed000f3fffff] PMD -> [ffff88006e600000-ffff88006e7fffff] on node -1
+ [ffffed000f400000-ffffed000f5fffff] PMD -> [ffff88006e400000-ffff88006e5fffff] on node -1
+ [ffffed000f600000-ffffed000f7fffff] PMD -> [ffff88006e200000-ffff88006e3fffff] on node -1
+ [ffffed000f800000-ffffed000f9fffff] PMD -> [ffff88006e000000-ffff88006e1fffff] on node -1
+ [ffffed000fa00000-ffffed000fbfffff] PMD -> [ffff88006de00000-ffff88006dffffff] on node -1
+ [ffffed000fc00000-ffffed000fdfffff] PMD -> [ffff88006dc00000-ffff88006ddfffff] on node -1
+ [ffffed000fe00000-ffffed000fffffff] PMD -> [ffff88006da00000-ffff88006dbfffff] on node -1
+ [fffffbfff0200039-fffffbfff0400038] PMD -> [ffff88006d800000-ffff88006d9fffff] on node -1
+ [fffffbfff0400000-fffffbfff05fffff] PMD -> [ffff88006d600000-ffff88006d7fffff] on node -1
+kasan: KernelAddressSanitizer initialized
+ACPI: PM-Timer IO Port: 0x608
+ACPI: Local APIC address 0xfee00000
+ACPI: LAPIC_NMI (acpi_id[0xff] dfl dfl lint[0x1])
+IOAPIC[0]: apic_id 0, version 17, address 0xfec00000, GSI 0-23
+ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+ACPI: INT_SRC_OVR (bus 0 bus_irq 5 global_irq 5 high level)
+ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+ACPI: INT_SRC_OVR (bus 0 bus_irq 10 global_irq 10 high level)
+ACPI: INT_SRC_OVR (bus 0 bus_irq 11 global_irq 11 high level)
+ACPI: IRQ0 used by override.
+ACPI: IRQ5 used by override.
+ACPI: IRQ9 used by override.
+ACPI: IRQ10 used by override.
+ACPI: IRQ11 used by override.
+Using ACPI (MADT) for SMP configuration information
+ACPI: HPET id: 0x8086a201 base: 0xfed00000
+smpboot: Allowing 2 CPUs, 0 hotplug CPUs
+PM: Registered nosave memory: [mem 0x00000000-0x00000fff]
+PM: Registered nosave memory: [mem 0x0009f000-0x0009ffff]
+PM: Registered nosave memory: [mem 0x000a0000-0x000effff]
+PM: Registered nosave memory: [mem 0x000f0000-0x000fffff]
+e820: [mem 0x80000000-0xfeffbfff] available for PCI devices
+Booting paravirtualized kernel on KVM
+clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1910969940391419 ns
+setup_percpu: NR_CPUS:64 nr_cpumask_bits:64 nr_cpu_ids:2 nr_node_ids:1
+PERCPU: Embedded 41 pages/cpu @ffff88006d200000 s127832 r8192 d31912 u1048576
+pcpu-alloc: s127832 r8192 d31912 u1048576 alloc=1*2097152
+pcpu-alloc: [0] 0 1
+KVM setup async PF for cpu 0
+kvm-stealtime: cpu 0, msr 6d2158c0
+Built 1 zonelists in Node order, mobility grouping on.  Total pages: 515945
+Policy zone: DMA32
+Kernel command line: console=ttyS0 root=/dev/sda debug earlyprintk=serial
+PID hash table entries: 4096 (order: 3, 32768 bytes)
+Calgary: detecting Calgary via BIOS EBDA area
+Calgary: Unable to locate Rio Grande table in EBDA - bailing!
+Memory: 1746660K/2096632K available (33565K kernel code, 4626K rwdata, 5840K rodata, 1592K init, 1100K bss, 349972K reserved, 0K cma-reserved)
+SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=2, Nodes=1
+Hierarchical RCU implementation.
+	Build-time adjustment of leaf fanout to 64.
+	RCU restricting CPUs from NR_CPUS=64 to nr_cpu_ids=2.
+RCU: Adjusting geometry for rcu_fanout_leaf=64, nr_cpu_ids=2
+NR_IRQS:4352 nr_irqs:440 16
+Console: colour VGA+ 80x25
+console [ttyS0] enabled
+console [ttyS0] enabled
+bootconsole [earlyser0] disabled
+bootconsole [earlyser0] disabled
+clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604467 ns
+hpet clockevent registered
+tsc: Detected 3192.306 MHz processor
+Calibrating delay loop (skipped) preset value.. 6384.61 BogoMIPS (lpj=3192306)
+pid_max: default: 32768 minimum: 301
+ACPI: Core revision 20150818
+ACPI: 2 ACPI AML tables successfully acquired and loaded
+Security Framework initialized
+SELinux:  Initializing.
+SELinux:  Starting in permissive mode
+Dentry cache hash table entries: 262144 (order: 9, 2097152 bytes)
+Inode-cache hash table entries: 131072 (order: 8, 1048576 bytes)
+Mount-cache hash table entries: 4096 (order: 3, 32768 bytes)
+Mountpoint-cache hash table entries: 4096 (order: 3, 32768 bytes)
+Initializing cgroup subsys freezer
+mce: CPU supports 10 MCE banks
+Last level iTLB entries: 4KB 0, 2MB 0, 4MB 0
+Last level dTLB entries: 4KB 0, 2MB 0, 4MB 0, 1GB 0
+Freeing SMP alternatives memory: 32K (ffffffff83e18000 - ffffffff83e20000)
+..TIMER: vector=0x30 apic1=0 pin1=2 apic2=-1 pin2=-1
+smpboot: CPU0: Intel QEMU Virtual CPU version 2.1.3 (family: 0x6, model: 0x6, stepping: 0x3)
+Performance Events: Broken PMU hardware detected, using software events only.
+Failed to access perfctr msr (MSR c2 is 0)
+x86: Booting SMP configuration:
+.... node  #0, CPUs:      #1
+kvm-clock: cpu 1, msr 0:7ffdb041, secondary cpu clock
+x86: Booted up 1 node, 2 CPUs
+KVM setup async PF for cpu 1
+kvm-stealtime: cpu 1, msr 6d3158c0
+smpboot: Total of 2 processors activated (12769.22 BogoMIPS)
+devtmpfs: initialized
+clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275000 ns
+kworker/u4:0 (17) used greatest stack depth: 29952 bytes left
+RTC time: 17:47:48, date: 10/10/15
+NET: Registered protocol family 16
+cpuidle: using governor ladder
+cpuidle: using governor menu
+ACPI: bus type PCI registered
+PCI: Using configuration type 1 for base access
+kworker/u4:0 (47) used greatest stack depth: 29488 bytes left
+kworker/u4:0 (63) used greatest stack depth: 28640 bytes left
+ACPI: Added _OSI(Module Device)
+ACPI: Added _OSI(Processor Device)
+ACPI: Added _OSI(3.0 _SCP Extensions)
+ACPI: Added _OSI(Processor Aggregator Device)
+ACPI: Interpreter enabled
+ACPI Exception: AE_NOT_FOUND, While evaluating Sleep State [\_S1_] (20150818/hwxface-580)
+ACPI Exception: AE_NOT_FOUND, While evaluating Sleep State [\_S2_] (20150818/hwxface-580)
+ACPI: (supports S0 S3 S4 S5)
+ACPI: Using IOAPIC for interrupt routing
+PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-ff])
+acpi PNP0A03:00: _OSC: OS supports [ASPM ClockPM Segments MSI]
+acpi PNP0A03:00: _OSC failed (AE_NOT_FOUND); disabling ASPM
+acpi PNP0A03:00: fail to add MMCONFIG information, can't access extended PCI configuration space under this bridge.
+PCI host bridge to bus 0000:00
+pci_bus 0000:00: root bus resource [bus 00-ff]
+pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+pci_bus 0000:00: root bus resource [io  0x0d00-0xadff window]
+pci_bus 0000:00: root bus resource [io  0xae0f-0xaeff window]
+pci_bus 0000:00: root bus resource [io  0xaf20-0xafdf window]
+pci_bus 0000:00: root bus resource [io  0xafe4-0xffff window]
+pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+pci_bus 0000:00: root bus resource [mem 0x80000000-0xfebfffff window]
+pci 0000:00:00.0: [8086:1237] type 00 class 0x060000
+pci 0000:00:01.0: [8086:7000] type 00 class 0x060100
+pci 0000:00:01.1: [8086:7010] type 00 class 0x010180
+pci 0000:00:01.1: reg 0x20: [io  0xc040-0xc04f]
+pci 0000:00:01.1: legacy IDE quirk: reg 0x10: [io  0x01f0-0x01f7]
+pci 0000:00:01.1: legacy IDE quirk: reg 0x14: [io  0x03f6]
+pci 0000:00:01.1: legacy IDE quirk: reg 0x18: [io  0x0170-0x0177]
+pci 0000:00:01.1: legacy IDE quirk: reg 0x1c: [io  0x0376]
+pci 0000:00:01.3: [8086:7113] type 00 class 0x068000
+pci 0000:00:01.3: quirk: [io  0x0600-0x063f] claimed by PIIX4 ACPI
+pci 0000:00:01.3: quirk: [io  0x0700-0x070f] claimed by PIIX4 SMB
+pci 0000:00:02.0: [1013:00b8] type 00 class 0x030000
+pci 0000:00:02.0: reg 0x10: [mem 0xfc000000-0xfdffffff pref]
+pci 0000:00:02.0: reg 0x14: [mem 0xfebf4000-0xfebf4fff]
+pci 0000:00:02.0: reg 0x30: [mem 0xfebe0000-0xfebeffff pref]
+pci 0000:00:03.0: [8086:100e] type 00 class 0x020000
+pci 0000:00:03.0: reg 0x10: [mem 0xfebc0000-0xfebdffff]
+pci 0000:00:03.0: reg 0x14: [io  0xc000-0xc03f]
+pci 0000:00:03.0: reg 0x30: [mem 0xfeb80000-0xfebbffff pref]
+pci 0000:00:04.0: [1033:0194] type 00 class 0x0c0330
+pci 0000:00:04.0: reg 0x10: [mem 0xfebf0000-0xfebf3fff 64bit]
+ACPI: PCI Interrupt Link [LNKA] (IRQs 5 *10 11)
+ACPI: PCI Interrupt Link [LNKB] (IRQs 5 *10 11)
+ACPI: PCI Interrupt Link [LNKC] (IRQs 5 10 *11)
+ACPI: PCI Interrupt Link [LNKD] (IRQs 5 10 *11)
+ACPI: PCI Interrupt Link [LNKS] (IRQs *9)
+ACPI: Enabled 16 GPEs in block 00 to 0F
+vgaarb: setting as boot device: PCI:0000:00:02.0
+vgaarb: device added: PCI:0000:00:02.0,decodes=io+mem,owns=io+mem,locks=none
+vgaarb: loaded
+vgaarb: bridge control possible 0000:00:02.0
+SCSI subsystem initialized
+libata version 3.00 loaded.
+ACPI: bus type USB registered
+usbcore: registered new interface driver usbfs
+usbcore: registered new interface driver hub
+usbcore: registered new device driver usb
+pps_core: LinuxPPS API ver. 1 registered
+pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+PTP clock support registered
+Advanced Linux Sound Architecture Driver Initialized.
+PCI: Using ACPI for IRQ routing
+PCI: pci_cache_line_size set to 64 bytes
+e820: reserve RAM buffer [mem 0x0009fc00-0x0009ffff]
+e820: reserve RAM buffer [mem 0x7ffe0000-0x7fffffff]
+NetLabel: Initializing
+NetLabel:  domain hash size = 128
+NetLabel:  protocols = UNLABELED CIPSOv4
+NetLabel:  unlabeled traffic allowed by default
+HPET: 3 timers in total, 0 timers will be used for per-cpu timer
+hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0
+hpet0: 3 comparators, 64-bit 100.000000 MHz counter
+clocksource: Switched to clocksource kvm-clock
+pnp: PnP ACPI init
+pnp 00:00: Plug and Play ACPI device, IDs PNP0b00 (active)
+pnp 00:01: Plug and Play ACPI device, IDs PNP0303 (active)
+pnp 00:02: Plug and Play ACPI device, IDs PNP0f13 (active)
+pnp 00:03: [dma 2]
+pnp 00:03: Plug and Play ACPI device, IDs PNP0700 (active)
+pnp 00:04: Plug and Play ACPI device, IDs PNP0400 (active)
+pnp 00:05: Plug and Play ACPI device, IDs PNP0501 (active)
+pnp: PnP ACPI: found 6 devices
+clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+pci_bus 0000:00: resource 5 [io  0x0d00-0xadff window]
+pci_bus 0000:00: resource 6 [io  0xae0f-0xaeff window]
+pci_bus 0000:00: resource 7 [io  0xaf20-0xafdf window]
+pci_bus 0000:00: resource 8 [io  0xafe4-0xffff window]
+pci_bus 0000:00: resource 9 [mem 0x000a0000-0x000bffff window]
+pci_bus 0000:00: resource 10 [mem 0x80000000-0xfebfffff window]
+NET: Registered protocol family 2
+TCP established hash table entries: 16384 (order: 5, 131072 bytes)
+TCP bind hash table entries: 16384 (order: 6, 262144 bytes)
+TCP: Hash tables configured (established 16384 bind 16384)
+UDP hash table entries: 1024 (order: 3, 32768 bytes)
+UDP-Lite hash table entries: 1024 (order: 3, 32768 bytes)
+NET: Registered protocol family 1
+RPC: Registered named UNIX socket transport module.
+RPC: Registered udp transport module.
+RPC: Registered tcp transport module.
+RPC: Registered tcp NFSv4.1 backchannel transport module.
+pci 0000:00:00.0: Limiting direct PCI/PCI transfers
+pci 0000:00:01.0: PIIX3: Enabling Passive Release
+pci 0000:00:01.0: Activating ISA DMA hang workarounds
+pci 0000:00:02.0: Video device with shadowed ROM
+PCI: CLS 0 bytes, default 64
+microcode: CPU0 sig=0x663, pf=0x1, revision=0x1
+microcode: CPU1 sig=0x663, pf=0x1, revision=0x1
+microcode: Microcode Update Driver: v2.00 <tigran@aivazian.fsnet.co.uk>, Peter Oruba
+Scanning for low memory corruption every 60 seconds
+futex hash table entries: 512 (order: 3, 32768 bytes)
+audit: initializing netlink subsys (disabled)
+audit: type=2000 audit(1444499268.530:1): initialized
+HugeTLB registered 2 MB page size, pre-allocated 0 pages
+VFS: Disk quotas dquot_6.6.0
+VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+NFS: Registering the id_resolver key type
+Key type id_resolver registered
+Key type id_legacy registered
+9p: Installing v9fs 9p2000 file system support
+SELinux:  Registering netfilter hooks
+Block layer SCSI generic (bsg) driver version 0.4 loaded (major 251)
+io scheduler noop registered
+io scheduler deadline registered
+io scheduler cfq registered (default)
+pci_hotplug: PCI Hot Plug PCI Core version: 0.5
+input: Power Button as /devices/LNXSYSTM:00/LNXPWRBN:00/input/input0
+ACPI: Power Button [PWRF]
+Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+00:05: ttyS0 at I/O 0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+Non-volatile memory driver v1.3
+Linux agpgart interface v0.103
+[drm] Initialized drm 1.1.0 20060810
+loop: module loaded
+ata_piix 0000:00:01.1: version 2.13
+scsi host0: ata_piix
+scsi host1: ata_piix
+ata1: PATA max MWDMA2 cmd 0x1f0 ctl 0x3f6 bmdma 0xc040 irq 14
+ata2: PATA max MWDMA2 cmd 0x170 ctl 0x376 bmdma 0xc048 irq 15
+e100: Intel(R) PRO/100 Network Driver, 3.5.24-k2-NAPI
+e100: Copyright(c) 1999-2006 Intel Corporation
+e1000: Intel(R) PRO/1000 Network Driver - version 7.3.21-k8-NAPI
+e1000: Copyright (c) 1999-2006 Intel Corporation.
+ACPI: PCI Interrupt Link [LNKC] enabled at IRQ 11
+ata1.00: ATA-7: QEMU HARDDISK, 2.1.3, max UDMA/100
+ata1.00: 2099200 sectors, multi 16: LBA48
+ata1.01: ATA-7: QEMU HARDDISK, 2.1.3, max UDMA/100
+ata1.01: 2097152 sectors, multi 16: LBA48
+ata1.00: configured for MWDMA2
+ata1.01: configured for MWDMA2
+scsi 0:0:0:0: Direct-Access     ATA      QEMU HARDDISK    3    PQ: 0 ANSI: 5
+sd 0:0:0:0: [sda] 2099200 512-byte logical blocks: (1.07 GB/1.00 GiB)
+sd 0:0:0:0: [sda] Write Protect is off
+sd 0:0:0:0: [sda] Mode Sense: 00 3a 00 00
+sd 0:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+sd 0:0:0:0: Attached scsi generic sg0 type 0
+ata2.01: NODEV after polling detection
+sd 0:0:0:0: [sda] Attached SCSI disk
+ata2.00: ATAPI: QEMU DVD-ROM, 2.1.3, max UDMA/100
+ata2.00: configured for MWDMA2
+scsi 0:0:1:0: Direct-Access     ATA      QEMU HARDDISK    3    PQ: 0 ANSI: 5
+sd 0:0:1:0: [sdb] 2097152 512-byte logical blocks: (1.07 GB/1.00 GiB)
+sd 0:0:1:0: [sdb] Write Protect is off
+sd 0:0:1:0: [sdb] Mode Sense: 00 3a 00 00
+sd 0:0:1:0: Attached scsi generic sg1 type 0
+sd 0:0:1:0: [sdb] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+sd 0:0:1:0: [sdb] Attached SCSI disk
+scsi 1:0:0:0: CD-ROM            QEMU     QEMU DVD-ROM     2.1. PQ: 0 ANSI: 5
+sr 1:0:0:0: [sr0] scsi3-mmc drive: 4x/4x cd/rw xa/form2 tray
+cdrom: Uniform CD-ROM driver Revision: 3.20
+sr 1:0:0:0: Attached scsi CD-ROM sr0
+sr 1:0:0:0: Attached scsi generic sg2 type 5
+e1000 0000:00:03.0 eth0: (PCI:33MHz:32-bit) 52:54:00:12:34:56
+e1000 0000:00:03.0 eth0: Intel(R) PRO/1000 Network Connection
+sky2: driver version 1.30
+ACPI: PCI Interrupt Link [LNKD] enabled at IRQ 10
+xhci_hcd 0000:00:04.0: xHCI Host Controller
+xhci_hcd 0000:00:04.0: new USB bus registered, assigned bus number 1
+xhci_hcd 0000:00:04.0: hcc params 0x00087001 hci version 0x100 quirks 0x00000014
+usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+usb usb1: Product: xHCI Host Controller
+usb usb1: Manufacturer: Linux 4.3.0-rc4-kasan xhci-hcd
+usb usb1: SerialNumber: 0000:00:04.0
+hub 1-0:1.0: USB hub found
+hub 1-0:1.0: 4 ports detected
+xhci_hcd 0000:00:04.0: xHCI Host Controller
+xhci_hcd 0000:00:04.0: new USB bus registered, assigned bus number 2
+usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.
+usb usb2: New USB device found, idVendor=1d6b, idProduct=0003
+usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+usb usb2: Product: xHCI Host Controller
+usb usb2: Manufacturer: Linux 4.3.0-rc4-kasan xhci-hcd
+usb usb2: SerialNumber: 0000:00:04.0
+hub 2-0:1.0: USB hub found
+hub 2-0:1.0: 4 ports detected
+ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+ehci-pci: EHCI PCI platform driver
+ehci-platform: EHCI generic platform driver
+ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+ohci-pci: OHCI PCI platform driver
+uhci_hcd: USB Universal Host Controller Interface driver
+fusbh200_hcd: FUSBH200 Host Controller (EHCI) Driver
+Warning! fusbh200_hcd should always be loaded before uhci_hcd and ohci_hcd, not after
+fotg210_hcd: FOTG210 Host Controller (EHCI) Driver
+4Warning! fotg210_hcd should always be loaded before uhci_hcd and ohci_hcd, not after
+usbcore: registered new interface driver cdc_acm
+cdc_acm: USB Abstract Control Model driver for USB modems and ISDN adapters
+usbcore: registered new interface driver usblp
+usbcore: registered new interface driver cdc_wdm
+usbcore: registered new interface driver usbtmc
+usbcore: registered new interface driver uas
+usbcore: registered new interface driver usb-storage
+usbcore: registered new interface driver ums-alauda
+usbcore: registered new interface driver ums-cypress
+usbcore: registered new interface driver ums-datafab
+usbcore: registered new interface driver ums_eneub6250
+usbcore: registered new interface driver ums-freecom
+usbcore: registered new interface driver ums-isd200
+usbcore: registered new interface driver ums-jumpshot
+usbcore: registered new interface driver ums-karma
+usbcore: registered new interface driver ums-onetouch
+usbcore: registered new interface driver ums-realtek
+usbcore: registered new interface driver ums-sddr09
+usbcore: registered new interface driver ums-sddr55
+usbcore: registered new interface driver ums-usbat
+usbcore: registered new interface driver mdc800
+mdc800: v0.7.5 (30/10/2000):USB Driver for Mustek MDC800 Digital Camera
+usbcore: registered new interface driver microtekX6
+usbcore: registered new interface driver usbserial
+usbcore: registered new interface driver adutux
+usbcore: registered new interface driver appledisplay
+usbcore: registered new interface driver cypress_cy7c63
+usbcore: registered new interface driver cytherm
+usbcore: registered new interface driver emi26 - firmware loader
+usbcore: registered new interface driver emi62 - firmware loader
+ftdi_elan: driver ftdi-elan
+usbcore: registered new interface driver ftdi-elan
+usbcore: registered new interface driver idmouse
+usbcore: registered new interface driver iowarrior
+usbcore: registered new interface driver isight_firmware
+usbcore: registered new interface driver usblcd
+usbcore: registered new interface driver ldusb
+usbcore: registered new interface driver usbled
+usbcore: registered new interface driver legousbtower
+usbcore: registered new interface driver rio500
+usbcore: registered new interface driver usbtest
+usbcore: registered new interface driver usb_ehset_test
+usbcore: registered new interface driver trancevibrator
+usbcore: registered new interface driver usbsevseg
+usbcore: registered new interface driver yurex
+usbcore: registered new interface driver chaoskey
+usbcore: registered new interface driver sisusb
+usbcore: registered new interface driver lvs
+usbip_core: usbip_core_init:761: USB/IP Core v1.0.0
+vhci_hcd: vhci_hcd_probe:998: name vhci_hcd id -1
+vhci_hcd vhci_hcd: USB/IP Virtual Host Controller
+vhci_hcd vhci_hcd: new USB bus registered, assigned bus number 3
+vhci_hcd: vhci_start:881: enter vhci_start
+usb usb3: New USB device found, idVendor=1d6b, idProduct=0002
+usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+usb usb3: Product: USB/IP Virtual Host Controller
+usb usb3: Manufacturer: Linux 4.3.0-rc4-kasan vhci_hcd
+usb usb3: SerialNumber: vhci_hcd
+hub 3-0:1.0: USB hub found
+vhci_hcd: vhci_hub_control:245: typeReq a006 wValue 2900 wIndex 0
+vhci_hcd: vhci_hub_control:303:  GetHubDescriptor
+vhci_hcd: vhci_hub_control:397: port -1
+vhci_hcd: vhci_hub_control:404:  bye
+hub 3-0:1.0: 8 ports detected
+vhci_hcd: vhci_hub_control:245: typeReq a000 wValue 0 wIndex 0
+vhci_hcd: vhci_hub_control:307:  GetHubStatus
+vhci_hcd: vhci_hub_control:397: port -1
+vhci_hcd: vhci_hub_control:404:  bye
+vhci_hcd: vhci_hub_control:245: typeReq 2303 wValue 8 wIndex 1
+vhci_hcd: vhci_hub_control:383:  SetPortFeature: default 8
+vhci_hcd: vhci_hub_control:397: port 0
+vhci_hcd: dump_port_status_diff:101: status prev -> new: 00000000 -> 00000100
+vhci_hcd: dump_port_status_diff:115:  +POWER
+vhci_hcd: dump_port_status_diff:119:
+vhci_hcd: vhci_hub_control:404:  bye
+vhci_hcd: vhci_hub_control:245: typeReq 2303 wValue 8 wIndex 2
+vhci_hcd: vhci_hub_control:383:  SetPortFeature: default 8
+vhci_hcd: vhci_hub_control:397: port 1
+vhci_hcd: dump_port_status_diff:101: status prev -> new: 00000000 -> 00000100
+vhci_hcd: dump_port_status_diff:115:  +POWER
+vhci_hcd: dump_port_status_diff:119:
+vhci_hcd: vhci_hub_control:404:  bye
+vhci_hcd: vhci_hub_control:245: typeReq 2303 wValue 8 wIndex 3
+vhci_hcd: vhci_hub_control:383:  SetPortFeature: default 8
+vhci_hcd: vhci_hub_control:397: port 2
+vhci_hcd: dump_port_status_diff:101: status prev -> new: 00000000 -> 00000100
+vhci_hcd: dump_port_status_diff:115:  +POWER
+vhci_hcd: dump_port_status_diff:119:
+vhci_hcd: vhci_hub_control:404:  bye
+vhci_hcd: vhci_hub_control:245: typeReq 2303 wValue 8 wIndex 4
+vhci_hcd: vhci_hub_control:383:  SetPortFeature: default 8
+vhci_hcd: vhci_hub_control:397: port 3
+vhci_hcd: dump_port_status_diff:101: status prev -> new: 00000000 -> 00000100
+vhci_hcd: dump_port_status_diff:115:  +POWER
+vhci_hcd: dump_port_status_diff:119:
+vhci_hcd: vhci_hub_control:404:  bye
+vhci_hcd: vhci_hub_control:245: typeReq 2303 wValue 8 wIndex 5
+vhci_hcd: vhci_hub_control:383:  SetPortFeature: default 8
+vhci_hcd: vhci_hub_control:397: port 4
+vhci_hcd: dump_port_status_diff:101: status prev -> new: 00000000 -> 00000100
+vhci_hcd: dump_port_status_diff:115:  +POWER
+vhci_hcd: dump_port_status_diff:119:
+vhci_hcd: vhci_hub_control:404:  bye
+vhci_hcd: vhci_hub_control:245: typeReq 2303 wValue 8 wIndex 6
+vhci_hcd: vhci_hub_control:383:  SetPortFeature: default 8
+vhci_hcd: vhci_hub_control:397: port 5
+vhci_hcd: dump_port_status_diff:101: status prev -> new: 00000000 -> 00000100
+vhci_hcd: dump_port_status_diff:115:  +POWER
+vhci_hcd: dump_port_status_diff:119:
+vhci_hcd: vhci_hub_control:404:  bye
+vhci_hcd: vhci_hub_control:245: typeReq 2303 wValue 8 wIndex 7
+vhci_hcd: vhci_hub_control:383:  SetPortFeature: default 8
+vhci_hcd: vhci_hub_control:397: port 6
+vhci_hcd: dump_port_status_diff:101: status prev -> new: 00000000 -> 00000100
+vhci_hcd: dump_port_status_diff:115:  +POWER
+vhci_hcd: dump_port_status_diff:119:
+vhci_hcd: vhci_hub_control:404:  bye
+vhci_hcd: vhci_hub_control:245: typeReq 2303 wValue 8 wIndex 8
+vhci_hcd: vhci_hub_control:383:  SetPortFeature: default 8
+vhci_hcd: vhci_hub_control:397: port 7
+vhci_hcd: dump_port_status_diff:101: status prev -> new: 00000000 -> 00000100
+vhci_hcd: dump_port_status_diff:115:  +POWER
+vhci_hcd: dump_port_status_diff:119:
+vhci_hcd: vhci_hub_control:404:  bye
+vhci_hcd: vhci_hcd_probe:1026: bye
+vhci_hcd: vhci_hcd_init:1147: USB/IP 'Virtual' Host Controller (VHCI) Driver v1.0.0
+usbcore: registered new device driver usbip-host
+usbip_host: usbip_host_init:302: USB/IP Host Driver v1.0.0
+i8042: PNP: PS/2 Controller [PNP0303:KBD,PNP0f13:MOU] at 0x60,0x64 irq 1,12
+serio: i8042 KBD port at 0x60,0x64 irq 1
+serio: i8042 AUX port at 0x60,0x64 irq 12
+mousedev: PS/2 mouse device common for all mice
+input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input1
+rtc_cmos 00:00: RTC can wake from S4
+rtc_cmos 00:00: rtc core: registered rtc_cmos as rtc0
+rtc_cmos 00:00: alarms up to one day, 114 bytes nvram, hpet irqs
+device-mapper: ioctl: 4.33.0-ioctl (2015-8-18) initialised: dm-devel@redhat.com
+hidraw: raw HID events driver (C) Jiri Kosina
+usbcore: registered new interface driver usbhid
+usbhid: USB HID core driver
+Netfilter messages via NETLINK v0.30.
+nf_conntrack version 0.5.0 (16384 buckets, 65536 max)
+ctnetlink v0.93: registering with nfnetlink.
+ip_tables: (C) 2000-2006 Netfilter Core Team
+Initializing XFRM netlink socket
+NET: Registered protocol family 10
+ip6_tables: (C) 2000-2006 Netfilter Core Team
+sit: IPv6 over IPv4 tunneling driver
+NET: Registered protocol family 17
+9pnet: Installing 9P2000 support
+Key type dns_resolver registered
+registered taskstats version 1
+  Magic number: 3:814:794
+console [netcon0] enabled
+netconsole: network logging started
+PM: Hibernation image not present or could not be loaded.
+ALSA device list:
+  No soundcards found.
+vhci_hcd: vhci_hub_control:245: typeReq a300 wValue 0 wIndex 1
+vhci_hcd: vhci_hub_control:311:  GetPortStatus port 1
+vhci_hcd: vhci_hub_control:354:  GetPortStatus bye 100 0
+vhci_hcd: vhci_hub_control:397: port 0
+vhci_hcd: dump_port_status_diff:101: status prev -> new: 00000100 -> 00000100
+vhci_hcd: dump_port_status_diff:115:   POWER
+vhci_hcd: dump_port_status_diff:119:
+vhci_hcd: vhci_hub_control:404:  bye
+vhci_hcd: vhci_hub_control:245: typeReq a300 wValue 0 wIndex 2
+vhci_hcd: vhci_hub_control:311:  GetPortStatus port 2
+vhci_hcd: vhci_hub_control:354:  GetPortStatus bye 100 0
+vhci_hcd: vhci_hub_control:397: port 1
+vhci_hcd: dump_port_status_diff:101: status prev -> new: 00000100 -> 00000100
+vhci_hcd: dump_port_status_diff:115:   POWER
+vhci_hcd: dump_port_status_diff:119:
+vhci_hcd: vhci_hub_control:404:  bye
+vhci_hcd: vhci_hub_control:245: typeReq a300 wValue 0 wIndex 3
+vhci_hcd: vhci_hub_control:311:  GetPortStatus port 3
+vhci_hcd: vhci_hub_control:354:  GetPortStatus bye 100 0
+vhci_hcd: vhci_hub_control:397: port 2
+vhci_hcd: dump_port_status_diff:101: status prev -> new: 00000100 -> 00000100
+vhci_hcd: dump_port_status_diff:115:   POWER
+vhci_hcd: dump_port_status_diff:119:
+vhci_hcd: vhci_hub_control:404:  bye
+vhci_hcd: vhci_hub_control:245: typeReq a300 wValue 0 wIndex 4
+vhci_hcd: vhci_hub_control:311:  GetPortStatus port 4
+vhci_hcd: vhci_hub_control:354:  GetPortStatus bye 100 0
+vhci_hcd: vhci_hub_control:397: port 3
+vhci_hcd: dump_port_status_diff:101: status prev -> new: 00000100 -> 00000100
+vhci_hcd: dump_port_status_diff:115:   POWER
+vhci_hcd: dump_port_status_diff:119:
+vhci_hcd: vhci_hub_control:404:  bye
+vhci_hcd: vhci_hub_control:245: typeReq a300 wValue 0 wIndex 5
+vhci_hcd: vhci_hub_control:311:  GetPortStatus port 5
+vhci_hcd: vhci_hub_control:354:  GetPortStatus bye 100 0
+vhci_hcd: vhci_hub_control:397: port 4
+vhci_hcd: dump_port_status_diff:101: status prev -> new: 00000100 -> 00000100
+vhci_hcd: dump_port_status_diff:115:   POWER
+vhci_hcd: dump_port_status_diff:119:
+vhci_hcd: vhci_hub_control:404:  bye
+vhci_hcd: vhci_hub_control:245: typeReq a300 wValue 0 wIndex 6
+vhci_hcd: vhci_hub_control:311:  GetPortStatus port 6
+vhci_hcd: vhci_hub_control:354:  GetPortStatus bye 100 0
+vhci_hcd: vhci_hub_control:397: port 5
+vhci_hcd: dump_port_status_diff:101: status prev -> new: 00000100 -> 00000100
+vhci_hcd: dump_port_status_diff:115:   POWER
+vhci_hcd: dump_port_status_diff:119:
+vhci_hcd: vhci_hub_control:404:  bye
+vhci_hcd: vhci_hub_control:245: typeReq a300 wValue 0 wIndex 7
+vhci_hcd: vhci_hub_control:311:  GetPortStatus port 7
+vhci_hcd: vhci_hub_control:354:  GetPortStatus bye 100 0
+vhci_hcd: vhci_hub_control:397: port 6
+vhci_hcd: dump_port_status_diff:101: status prev -> new: 00000100 -> 00000100
+vhci_hcd: dump_port_status_diff:115:   POWER
+vhci_hcd: dump_port_status_diff:119:
+vhci_hcd: vhci_hub_control:404:  bye
+vhci_hcd: vhci_hub_control:245: typeReq a300 wValue 0 wIndex 8
+vhci_hcd: vhci_hub_control:311:  GetPortStatus port 8
+vhci_hcd: vhci_hub_control:354:  GetPortStatus bye 100 0
+vhci_hcd: vhci_hub_control:397: port 7
+vhci_hcd: dump_port_status_diff:101: status prev -> new: 00000100 -> 00000100
+vhci_hcd: dump_port_status_diff:115:   POWER
+vhci_hcd: dump_port_status_diff:119:
+vhci_hcd: vhci_hub_control:404:  bye
+usb usb3: vhci_bus_suspend
+tsc: Refined TSC clocksource calibration: 3192.275 MHz
+clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x2e03c89fe5d, max_idle_ns: 440795264951 ns
+input: ImExPS/2 Generic Explorer Mouse as /devices/platform/i8042/serio1/input/input3
+md: Waiting for all devices to be available before autodetect
+md: If you don't use raid, use raid=noautodetect
+md: Autodetecting RAID arrays.
+md: Scanned 0 and added 0 devices.
+md: autorun ...
+md: ... autorun DONE.
+EXT4-fs (sda): couldn't mount as ext3 due to feature incompatibilities
+EXT4-fs (sda): couldn't mount as ext2 due to feature incompatibilities
+EXT4-fs (sda): INFO: recovery required on readonly filesystem
+EXT4-fs (sda): write access will be enabled during recovery
+EXT4-fs (sda): recovery complete
+EXT4-fs (sda): mounted filesystem with ordered data mode. Opts: (null)
+VFS: Mounted root (ext4 filesystem) readonly on device 8:0.
+devtmpfs: mounted
+Freeing unused kernel memory: 1592K (ffffffff83c8a000 - ffffffff83e18000)
+Write protecting the kernel read-only data: 40960k
+Freeing unused kernel memory: 1116K (ffff8800030e9000 - ffff880003200000)
+Freeing unused kernel memory: 304K (ffff8800037b4000 - ffff880003800000)
+SELinux:  Could not open policy file <= /etc/selinux/targeted/policy/policy.30:  No such file or directory
+INIT: version 2.88 booting
+stty (1090) used greatest stack depth: 28216 bytes left
+run-parts (1091) used greatest stack depth: 28168 bytes left
+uname (1092) used greatest stack depth: 28072 bytes left
+startpar (1093) used greatest stack depth: 27968 bytes left
+tput (1094) used greatest stack depth: 27912 bytes left
+[[36minfo[39;49m] Using makefile-style concurrent boot in runlevel S.
+ls (1125) used greatest stack depth: 27592 bytes left
+Starting the hotplug events dispatcher: udevd[    2.554969] udevd[1198]: starting version 175
+[?25l[?1c7[1G[[32m ok [39;49m8[?25h[?0c.
+Synthesizing the initial hotplug events...[    2.638014] pci-db (1263) used greatest stack depth: 27128 bytes left
+[?25l[?1c7[    2.675510] random: nonblocking pool is initialized
+[1G[[32m ok [39;49m8[    2.696672] cdrom_id (1283) used greatest stack depth: 26624 bytes left
+[?25h[?0cdone.
+Waiting for /dev to be fully populated...[?25l[?1c7[1G[[32m ok [39;49m8[?25h[?0cdone.
+Activating swap...[?25l[?1c7[1G[[32m ok [39;49m8[?25h[?0cdone.
+EXT4-fs (sda): re-mounted. Opts: (null)
+Cleaning up temporary files... /tmp[?25l[?1c7[1G[[32m ok [39;49m8[?25h[?0c.
+Activating lvm and md swap...[?25l[?1c7[1G[[32m ok [39;49m8[?25h[?0cdone.
+Checking file systems...fsck from util-linux 2.20.1
+[?25l[?1c7[1G[[32m ok [39;49m8[?25h[?0cdone.
+Mounting local filesystems...[?25l[?1c7[1G[[32m ok [39;49m8[?25h[?0cdone.
+Activating swapfile swap...[?25l[?1c7[1G[[32m ok [39;49m8[?25h[?0cdone.
+Cleaning up temporary files...[?25l[?1c7[1G[[32m ok [39;49m8[?25h[?0c.
+Setting kernel variables ...[?25l[?1c7[1G[[32m ok [39;49m8[?25h[?0cdone.
+Configuring network interfaces...[    3.961256] ip (2347) used greatest stack depth: 26296 bytes left
+Internet Systems Consortium DHCP Client 4.2.2
+Copyright 2004-2011 Internet Systems Consortium.
+All rights reserved.
+For info, please visit https://www.isc.org/software/dhcp/
+
+IPv6: ADDRCONF(NETDEV_UP): eth0: link is not ready
+Listening on LPF/eth0/52:54:00:12:34:56
+Sending on   LPF/eth0/52:54:00:12:34:56
+Sending on   Socket/fallback
+DHCPREQUEST on eth0 to 255.255.255.255 port 67
+e1000: eth0 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: RX
+IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+DHCPREQUEST on eth0 to 255.255.255.255 port 67
+DHCPACK from 10.0.2.2
+bound to 10.0.2.15 -- renewal in 41645 seconds.
+[?25l[?1c7[1G[[32m ok [39;49m8[?25h[?0cdone.
+Cleaning up temporary files...[?25l[?1c7[1G[[32m ok [39;49m8[?25h[?0c.
+INIT: Entering runlevel: 2
+[[36minfo[39;49m] Using makefile-style concurrent boot in runlevel 2.
+Starting enhanced syslogd: rsyslogd[?25l[?1c7[1G[[32m ok [39;49m8[?25h[?0c.
+Starting periodic command scheduler: cron[?25l[?1c7[1G[[32m ok [39;49m8[?25h[?0c.
+Starting OpenBSD Secure Shell server: sshd[?25l[?1c7[1G[[32m ok [39;49m8[?25h[?0c.
+usb 1-1: new full-speed USB device number 2 using xhci_hcd
+usb 1-1: config 1 interface 0 altsetting 0 has 3 endpoint descriptors, different from the interface descriptor's value: 2
+usb 1-1: New USB device found, idVendor=03f0, idProduct=0401
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 2
+usb 1-1: new full-speed USB device number 3 using xhci_hcd
+usb 1-1: config 1 has 0 interfaces, different from the descriptor's value: 1
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2049
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: USB disconnect, device number 3
+usb 1-1: new full-speed USB device number 4 using xhci_hcd
+usb 1-1: config 1 has an invalid interface number: 0 but max is -1
+usb 1-1: config 1 has 1 interface, different from the descriptor's value: 0
+usb 1-1: New USB device found, idVendor=03eb, idProduct=204d
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 4
+usb 1-1: new full-speed USB device number 5 using xhci_hcd
+usb 1-1: config 1 interface 0 altsetting 0 has 3 endpoint descriptors, different from the interface descriptor's value: 2
+usb 1-1: New USB device found, idVendor=03eb, idProduct=3312
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 5
+usb 1-1: new full-speed USB device number 6 using xhci_hcd
+usb 1-1: config 1 has 0 interfaces, different from the descriptor's value: 1
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2069
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: USB disconnect, device number 6
+usb 1-1: new full-speed USB device number 7 using xhci_hcd
+usb 1-1: config 1 has an invalid descriptor of length 255, skipping remainder of the config
+usb 1-1: config 1 interface 0 altsetting 0 has 0 endpoint descriptors, different from the interface descriptor's value: 3
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2122
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: USB disconnect, device number 7
+usb 1-1: new full-speed USB device number 8 using xhci_hcd
+usb 1-1: config 1 interface 0 altsetting 0 has 3 endpoint descriptors, different from the interface descriptor's value: 2
+usb 1-1: New USB device found, idVendor=03eb, idProduct=3301
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 8
+usb 1-1: new full-speed USB device number 9 using xhci_hcd
+usb 1-1: New USB device found, idVendor=03f0, idProduct=0304
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 9
+usb 1-1: new full-speed USB device number 10 using xhci_hcd
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 11 using xhci_hcd
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 12 using xhci_hcd
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 13 using xhci_hcd
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb usb1-port1: unable to enumerate USB device
+usb 1-1: new full-speed USB device number 14 using xhci_hcd
+usb 1-1: config 1 has 0 interfaces, different from the descriptor's value: 1
+usb 1-1: New USB device found, idVendor=03f0, idProduct=0311
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: USB disconnect, device number 14
+usb 1-1: new full-speed USB device number 15 using xhci_hcd
+usb 1-1: config 1 interface 0 has no altsetting 0
+usb 1-1: New USB device found, idVendor=03ee, idProduct=2501
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+Did not find alt setting 0 for intf 0, config 1
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 15
+usb 1-1: new full-speed USB device number 16 using xhci_hcd
+usb 1-1: config 1 has too many interfaces: 255, using maximum allowed: 32
+usb 1-1: config 1 has 1 interface, different from the descriptor's value: 255
+usb 1-1: New USB device found, idVendor=03f0, idProduct=0405
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 16
+usb 1-1: new full-speed USB device number 17 using xhci_hcd
+usb 1-1: config 1 interface 0 has no altsetting 0
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2043
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+Did not find alt setting 0 for intf 0, config 1
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 17
+usb 1-1: new full-speed USB device number 18 using xhci_hcd
+usb 1-1: config 1 has an invalid interface number: 137 but max is 0
+usb 1-1: config 1 has no interface number 0
+usb 1-1: New USB device found, idVendor=03f0, idProduct=0304
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 18
+usb 1-1: new full-speed USB device number 19 using xhci_hcd
+usb 1-1: new full-speed USB device number 20 using xhci_hcd
+usb 1-1: config 1 interface 0 has no altsetting 0
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2069
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+Did not find alt setting 0 for intf 0, config 1
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 20
+usb 1-1: new full-speed USB device number 21 using xhci_hcd
+usb 1-1: too many configurations: 30, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 22 using xhci_hcd
+usb 1-1: too many configurations: 30, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 23 using xhci_hcd
+usb 1-1: too many configurations: 30, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 24 using xhci_hcd
+usb 1-1: too many configurations: 30, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb usb1-port1: unable to enumerate USB device
+usb 1-1: new full-speed USB device number 25 using xhci_hcd
+usb 1-1: new full-speed USB device number 26 using xhci_hcd
+usb 1-1: config 1 has too many interfaces: 255, using maximum allowed: 32
+usb 1-1: config 1 has 1 interface, different from the descriptor's value: 255
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2044
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 26
+usb 1-1: new full-speed USB device number 27 using xhci_hcd
+usb 1-1: config 1 has an invalid descriptor of length 0, skipping remainder of the config
+usb 1-1: config 1 interface 0 altsetting 0 has 0 endpoint descriptors, different from the interface descriptor's value: 3
+usb 1-1: New USB device found, idVendor=03f0, idProduct=0111
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: USB disconnect, device number 27
+usb 1-1: new full-speed USB device number 28 using xhci_hcd
+usb 1-1: config 1 has an invalid descriptor of length 0, skipping remainder of the config
+usb 1-1: config 1 interface 0 altsetting 0 has 0 endpoint descriptors, different from the interface descriptor's value: 3
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2ffd
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: USB disconnect, device number 28
+usb 1-1: new full-speed USB device number 29 using xhci_hcd
+usb 1-1: config 1 has too many interfaces: 255, using maximum allowed: 32
+usb 1-1: config 1 has 1 interface, different from the descriptor's value: 255
+usb 1-1: New USB device found, idVendor=03eb, idProduct=3312
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 29
+usb 1-1: new full-speed USB device number 30 using xhci_hcd
+usb 1-1: config 1 has an invalid descriptor of length 0, skipping remainder of the config
+usb 1-1: config 1 interface 0 altsetting 0 has 0 endpoint descriptors, different from the interface descriptor's value: 3
+usb 1-1: New USB device found, idVendor=03f0, idProduct=0102
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: USB disconnect, device number 30
+INIT: Id "V0" respawning too fast: disabled for 5 minutes
+usb 1-1: new full-speed USB device number 31 using xhci_hcd
+usb 1-1: config 1 interface 0 altsetting 0 has 3 endpoint descriptors, different from the interface descriptor's value: 0
+usb 1-1: New USB device found, idVendor=03f0, idProduct=0104
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: USB disconnect, device number 31
+usb 1-1: new full-speed USB device number 32 using xhci_hcd
+usb 1-1: too many configurations: 255, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 33 using xhci_hcd
+usb 1-1: too many configurations: 255, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 34 using xhci_hcd
+usb 1-1: too many configurations: 255, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 35 using xhci_hcd
+usb 1-1: too many configurations: 255, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb usb1-port1: unable to enumerate USB device
+usb 1-1: new full-speed USB device number 36 using xhci_hcd
+usb 1-1: new full-speed USB device number 37 using xhci_hcd
+usb 1-1: config 1 interface 0 altsetting 0 has 3 endpoint descriptors, different from the interface descriptor's value: 0
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2018
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: USB disconnect, device number 37
+usb 1-1: new full-speed USB device number 38 using xhci_hcd
+usb 1-1: New USB device found, idVendor=0079, idProduct=0011
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 38
+usb 1-1: new full-speed USB device number 39 using xhci_hcd
+usb 1-1: New USB device found, idVendor=03eb, idProduct=0902
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 39
+usb 1-1: new full-speed USB device number 40 using xhci_hcd
+usb 1-1: too many configurations: 31, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 41 using xhci_hcd
+usb 1-1: too many configurations: 31, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 42 using xhci_hcd
+usb 1-1: too many configurations: 31, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 43 using xhci_hcd
+usb 1-1: too many configurations: 31, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb usb1-port1: unable to enumerate USB device
+usb 1-1: new full-speed USB device number 44 using xhci_hcd
+usb 1-1: config 1 has an invalid descriptor of length 0, skipping remainder of the config
+usb 1-1: config 1 interface 0 altsetting 0 has 1 endpoint descriptor, different from the interface descriptor's value: 3
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2109
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 44
+usb 1-1: new full-speed USB device number 45 using xhci_hcd
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2044
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 45
+usb 1-1: new full-speed USB device number 46 using xhci_hcd
+usb 1-1: too many configurations: 30, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 47 using xhci_hcd
+usb 1-1: too many configurations: 30, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 48 using xhci_hcd
+usb 1-1: too many configurations: 30, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 49 using xhci_hcd
+usb 1-1: too many configurations: 30, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb usb1-port1: unable to enumerate USB device
+usb 1-1: new full-speed USB device number 50 using xhci_hcd
+usb 1-1: too many endpoints for config 1 interface 0 altsetting 0: 31, using maximum allowed: 30
+usb 1-1: config 1 interface 0 altsetting 0 has 3 endpoint descriptors, different from the interface descriptor's value: 31
+usb 1-1: New USB device found, idVendor=03eb, idProduct=7617
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 50
+usb 1-1: new full-speed USB device number 51 using xhci_hcd
+usb 1-1: config 1 has an invalid interface number: 0 but max is -1
+usb 1-1: config 1 has 1 interface, different from the descriptor's value: 0
+usb 1-1: New USB device found, idVendor=03eb, idProduct=210d
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 51
+usb 1-1: new full-speed USB device number 52 using xhci_hcd
+usb 1-1: config 1 interface 0 has no altsetting 0
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2061
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+Did not find alt setting 0 for intf 0, config 1
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 52
+usb 1-1: new full-speed USB device number 53 using xhci_hcd
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2040
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 53
+usb 1-1: new full-speed USB device number 54 using xhci_hcd
+usb 1-1: config 1 has an invalid descriptor of length 0, skipping remainder of the config
+usb 1-1: config 1 interface 0 altsetting 0 has 0 endpoint descriptors, different from the interface descriptor's value: 3
+usb 1-1: New USB device found, idVendor=03f0, idProduct=0207
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: USB disconnect, device number 54
+usb 1-1: new full-speed USB device number 55 using xhci_hcd
+usb 1-1: no configurations
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 56 using xhci_hcd
+usb 1-1: no configurations
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 57 using xhci_hcd
+usb 1-1: no configurations
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 58 using xhci_hcd
+usb 1-1: no configurations
+usb 1-1: can't read configurations, error -22
+usb usb1-port1: unable to enumerate USB device
+usb 1-1: new full-speed USB device number 59 using xhci_hcd
+usb 1-1: New USB device found, idVendor=03eb, idProduct=6200
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 59
+usb 1-1: new full-speed USB device number 60 using xhci_hcd
+usb 1-1: new full-speed USB device number 61 using xhci_hcd
+usb 1-1: config 1 interface 0 has no altsetting 0
+usb 1-1: New USB device found, idVendor=03eb, idProduct=6119
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+Did not find alt setting 0 for intf 0, config 1
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 61
+usb 1-1: new full-speed USB device number 62 using xhci_hcd
+usb 1-1: config 1 interface 0 has no altsetting 0
+usb 1-1: New USB device found, idVendor=03ee, idProduct=641f
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+Did not find alt setting 0 for intf 0, config 1
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 62
+usb 1-1: new full-speed USB device number 63 using xhci_hcd
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2109
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+hub 1-1:1.0: ignoring external hub
+usb 1-1: USB disconnect, device number 63
+usb 1-1: new full-speed USB device number 64 using xhci_hcd
+usb 1-1: no configurations
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 65 using xhci_hcd
+usb 1-1: no configurations
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 66 using xhci_hcd
+usb 1-1: no configurations
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 67 using xhci_hcd
+usb 1-1: no configurations
+usb 1-1: can't read configurations, error -22
+usb usb1-port1: unable to enumerate USB device
+usb 1-1: new full-speed USB device number 68 using xhci_hcd
+usb 1-1: New USB device found, idVendor=03eb, idProduct=6119
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 68
+usb 1-1: new full-speed USB device number 69 using xhci_hcd
+usb 1-1: config 1 has 0 interfaces, different from the descriptor's value: 1
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2062
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: USB disconnect, device number 69
+usb 1-1: new full-speed USB device number 70 using xhci_hcd
+usb 1-1: too many endpoints for config 1 interface 0 altsetting 0: 31, using maximum allowed: 30
+usb 1-1: config 1 interface 0 altsetting 0 has 3 endpoint descriptors, different from the interface descriptor's value: 31
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2068
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 70
+usb 1-1: new full-speed USB device number 71 using xhci_hcd
+usb 1-1: New USB device found, idVendor=03f0, idProduct=0202
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 71
+usb 1-1: new full-speed USB device number 72 using xhci_hcd
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2042
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 72
+usb 1-1: new full-speed USB device number 73 using xhci_hcd
+usb 1-1: too many endpoints for config 1 interface 0 altsetting 0: 255, using maximum allowed: 30
+usb 1-1: config 1 interface 0 altsetting 0 has 3 endpoint descriptors, different from the interface descriptor's value: 255
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2310
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+hub 1-1:1.0: ignoring external hub
+usb 1-1: USB disconnect, device number 73
+usb 1-1: new full-speed USB device number 74 using xhci_hcd
+usb 1-1: config 1 interface 0 altsetting 0 has 3 endpoint descriptors, different from the interface descriptor's value: 30
+usb 1-1: New USB device found, idVendor=03eb, idProduct=204f
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 74
+usb 1-1: new full-speed USB device number 75 using xhci_hcd
+usb 1-1: New USB device found, idVendor=03eb, idProduct=6124
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 75
+usb 1-1: new full-speed USB device number 76 using xhci_hcd
+usb 1-1: config 1 interface 0 altsetting 0 has 3 endpoint descriptors, different from the interface descriptor's value: 2
+usb 1-1: New USB device found, idVendor=03f0, idProduct=0305
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 76
+usb 1-1: new full-speed USB device number 77 using xhci_hcd
+usb 1-1: config 1 has an invalid descriptor of length 7, skipping remainder of the config
+usb 1-1: config 1 interface 0 altsetting 0 has 0 endpoint descriptors, different from the interface descriptor's value: 3
+usb 1-1: New USB device found, idVendor=03f0, idProduct=0107
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: USB disconnect, device number 77
+usb 1-1: new full-speed USB device number 78 using xhci_hcd
+usb 1-1: config 1 has an invalid descriptor of length 0, skipping remainder of the config
+usb 1-1: config 1 interface 0 altsetting 0 has 1 endpoint descriptor, different from the interface descriptor's value: 3
+usb 1-1: New USB device found, idVendor=03f0, idProduct=020c
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 78
+usb 1-1: new full-speed USB device number 79 using xhci_hcd
+usb 1-1: config 1 interface 0 altsetting 0 has 3 endpoint descriptors, different from the interface descriptor's value: 0
+usb 1-1: New USB device found, idVendor=017c, idProduct=145f
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: USB disconnect, device number 79
+usb 1-1: new full-speed USB device number 80 using xhci_hcd
+usb 1-1: config 1 has an invalid interface number: 0 but max is -1
+usb 1-1: config 1 has 1 interface, different from the descriptor's value: 0
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2015
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 80
+usb 1-1: new full-speed USB device number 81 using xhci_hcd
+usb 1-1: New USB device found, idVendor=03f0, idProduct=0102
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 81
+usb 1-1: new full-speed USB device number 82 using xhci_hcd
+usb 1-1: too many configurations: 31, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 83 using xhci_hcd
+usb 1-1: too many configurations: 31, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 84 using xhci_hcd
+usb 1-1: too many configurations: 31, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 85 using xhci_hcd
+usb 1-1: too many configurations: 31, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb usb1-port1: unable to enumerate USB device
+usb 1-1: new full-speed USB device number 86 using xhci_hcd
+usb 1-1: config 1 interface 0 has no altsetting 0
+usb 1-1: New USB device found, idVendor=0218, idProduct=0301
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+Did not find alt setting 0 for intf 0, config 1
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 86
+usb 1-1: new full-speed USB device number 87 using xhci_hcd
+usb 1-1: New USB device found, idVendor=03eb, idProduct=204e
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 87
+usb 1-1: new full-speed USB device number 88 using xhci_hcd
+usb 1-1: config 1 interface 0 has no altsetting 0
+usb 1-1: New USB device found, idVendor=03eb, idProduct=2042
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+Did not find alt setting 0 for intf 0, config 1
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 88
+usb 1-1: new full-speed USB device number 89 using xhci_hcd
+usb 1-1: too many configurations: 255, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 90 using xhci_hcd
+usb 1-1: too many configurations: 255, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 91 using xhci_hcd
+usb 1-1: too many configurations: 255, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 92 using xhci_hcd
+usb 1-1: too many configurations: 255, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb usb1-port1: unable to enumerate USB device
+usb 1-1: new full-speed USB device number 93 using xhci_hcd
+usb 1-1: config 1 interface 0 has no altsetting 0
+usb 1-1: New USB device found, idVendor=03f0, idProduct=0111
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+Did not find alt setting 0 for intf 0, config 1
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 93
+usb 1-1: new full-speed USB device number 94 using xhci_hcd
+usb 1-1: New USB device found, idVendor=03ee, idProduct=5609
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 94
+usb 1-1: new full-speed USB device number 95 using xhci_hcd
+usb 1-1: config 1 interface 0 altsetting 0 has 3 endpoint descriptors, different from the interface descriptor's value: 30
+usb 1-1: New USB device found, idVendor=03eb, idProduct=7606
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+hub 1-1:1.0: ignoring external hub
+usb 1-1: USB disconnect, device number 95
+usb 1-1: new full-speed USB device number 96 using xhci_hcd
+usb 1-1: New USB device found, idVendor=03f0, idProduct=020c
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 96
+usb 1-1: new full-speed USB device number 97 using xhci_hcd
+usb 1-1: too many endpoints for config 1 interface 0 altsetting 0: 31, using maximum allowed: 30
+usb 1-1: config 1 interface 0 altsetting 0 has 3 endpoint descriptors, different from the interface descriptor's value: 31
+usb 1-1: New USB device found, idVendor=03f0, idProduct=0211
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 1-1: Product: ĉ
+usb 1-1: Manufacturer: ĉ
+usb 1-1: SerialNumber: %
+usb 1-1: ep 0x81 - rounding interval to 64 microframes, ep desc says 96 microframes
+usb 1-1: USB disconnect, device number 97
+usb 1-1: new full-speed USB device number 98 using xhci_hcd
+usb 1-1: too many configurations: 31, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 99 using xhci_hcd
+usb 1-1: too many configurations: 31, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 100 using xhci_hcd
+usb 1-1: too many configurations: 31, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb 1-1: new full-speed USB device number 101 using xhci_hcd
+usb 1-1: too many configurations: 31, using maximum allowed: 8
+usb 1-1: config index 1 descriptor too short (expected 9, got 0)
+usb 1-1: can't read configurations, error -22
+usb usb1-port1: unable to enumerate USB device
+==================================================================
+BUG: KASAN: use-after-free in xhci_bus_suspend+0x70c/0x7e0 at addr ffff88006b8b381c
+Read of size 4 by task kworker/1:2/883
+=============================================================================
+BUG kmalloc-2048 (Not tainted): kasan: bad access detected
+-----------------------------------------------------------------------------
+
+Disabling lock debugging due to kernel taint
+INFO: Slab 0xffffea0001ae2c00 objects=16 used=8 fp=0xffff88006b8b4000 flags=0x100000000004080
+INFO: Object 0xffff88006b8b3800 @offset=14336 fp=0xffff88006b8b3000
+
+Bytes b4 ffff88006b8b37f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3800: 00 30 8b 6b 00 88 ff ff 00 00 00 00 00 00 00 00  .0.k............
+Object ffff88006b8b3810: 00 00 00 00 00 00 00 00 00 00 00 00 02 00 00 00  ................
+Object ffff88006b8b3820: a0 0c 12 6c 00 88 ff ff 01 00 00 00 00 00 00 00  ...l............
+Object ffff88006b8b3830: 00 00 00 00 00 00 00 00 00 18 38 6c 00 88 ff ff  ..........8l....
+Object ffff88006b8b3840: 00 a0 69 6c 00 88 ff ff 07 05 00 00 40 00 00 00  ..il........@...
+Object ffff88006b8b3850: 00 00 00 00 00 00 00 00 58 38 8b 6b 00 88 ff ff  ........X8.k....
+Object ffff88006b8b3860: 58 38 8b 6b 00 88 ff ff 00 00 00 00 00 00 00 00  X8.k............
+Object ffff88006b8b3870: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3880: 00 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3890: 90 18 38 6c 00 88 ff ff 00 00 00 00 00 00 00 00  ..8l............
+Object ffff88006b8b38a0: f8 1e 4b 6c 00 88 ff ff a8 38 8b 6b 00 88 ff ff  ..Kl.....8.k....
+Object ffff88006b8b38b0: a8 38 8b 6b 00 88 ff ff 00 00 00 00 00 00 00 00  .8.k............
+Object ffff88006b8b38c0: 20 14 fb 6c 00 88 ff ff 40 c9 a5 83 ff ff ff ff   ..l....@.......
+Object ffff88006b8b38d0: 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00  ................
+Object ffff88006b8b38e0: 00 00 00 00 00 00 00 00 a0 95 ac 83 ff ff ff ff  ................
+Object ffff88006b8b38f0: 01 00 00 00 00 00 00 00 f8 38 8b 6b 00 88 ff ff  .........8.k....
+Object ffff88006b8b3900: f8 38 8b 6b 00 88 ff ff 00 00 00 00 00 00 00 00  .8.k............
+Object ffff88006b8b3910: 00 00 00 00 00 00 00 00 60 d8 ac 83 ff ff ff ff  ........`.......
+Object ffff88006b8b3920: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3930: 00 00 00 00 00 00 00 00 00 00 00 00 80 00 00 00  ................
+Object ffff88006b8b3940: 00 00 00 00 00 00 00 00 48 39 8b 6b 00 88 ff ff  ........H9.k....
+Object ffff88006b8b3950: 48 39 8b 6b 00 88 ff ff ff ff ff 7f 00 00 00 00  H9.k............
+Object ffff88006b8b3960: 00 00 00 00 00 00 00 00 68 39 8b 6b 00 88 ff ff  ........h9.k....
+Object ffff88006b8b3970: 68 39 8b 6b 00 88 ff ff 00 00 00 00 00 00 00 00  h9.k............
+Object ffff88006b8b3980: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3990: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b39a0: 00 b2 0b 82 ff ff ff ff 90 38 8b 6b 00 88 ff ff  .........8.k....
+Object ffff88006b8b39b0: 01 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 00  ................
+Object ffff88006b8b39c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b39d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b39e0: e0 ff ff ff 0f 00 00 00 e8 39 8b 6b 00 88 ff ff  .........9.k....
+Object ffff88006b8b39f0: e8 39 8b 6b 00 88 ff ff 00 be 0b 82 ff ff ff ff  .9.k............
+Object ffff88006b8b3a00: 00 00 00 00 00 00 00 00 08 3a 8b 6b 00 88 ff ff  .........:.k....
+Object ffff88006b8b3a10: 08 3a 8b 6b 00 88 ff ff 00 00 00 00 00 00 00 00  .:.k............
+Object ffff88006b8b3a20: 02 00 00 00 00 00 00 00 01 04 00 00 00 00 00 00  ................
+Object ffff88006b8b3a30: 02 00 00 00 00 00 00 00 d0 07 00 00 00 00 00 00  ................
+Object ffff88006b8b3a40: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3a50: 00 00 00 00 00 00 00 00 46 f9 fe ff 00 00 00 00  ........F.......
+Object ffff88006b8b3a60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3a70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3a80: 00 00 00 00 00 00 00 00 88 3a 8b 6b 00 88 ff ff  .........:.k....
+Object ffff88006b8b3a90: 88 3a 8b 6b 00 88 ff ff ff ff ff ff 00 00 00 00  .:.k............
+Object ffff88006b8b3aa0: 60 00 74 6c 00 88 ff ff 00 00 00 00 00 00 00 00  `.tl............
+Object ffff88006b8b3ab0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3ac0: c0 3a 8b 6b 00 88 ff ff c0 3a 8b 6b 00 88 ff ff  .:.k.....:.k....
+Object ffff88006b8b3ad0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3ae0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3af0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3b00: 00 00 00 00 00 00 00 00 08 3b 8b 6b 00 88 ff ff  .........;.k....
+Object ffff88006b8b3b10: 08 3b 8b 6b 00 88 ff ff 00 00 00 00 00 00 00 00  .;.k............
+Object ffff88006b8b3b20: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3b30: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3b40: 20 f4 ac 83 ff ff ff ff 00 00 00 00 00 00 00 00   ...............
+Object ffff88006b8b3b50: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3b60: 12 01 00 02 09 00 00 40 eb 03 04 76 00 01 01 02  .......@...v....
+Object ffff88006b8b3b70: 03 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3b80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3b90: 48 38 8b 6b 00 88 ff ff 00 00 00 00 00 00 00 00  H8.k............
+Object ffff88006b8b3ba0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3bb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3bc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3bd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3be0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3bf0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3c00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3c10: 48 38 8b 6b 00 88 ff ff 00 00 00 00 00 00 00 00  H8.k............
+Object ffff88006b8b3c20: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3c30: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3c40: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3c50: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3c60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3c70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3c80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3c90: 00 00 00 00 00 00 00 00 f4 01 01 01 0b 00 00 00  ................
+Object ffff88006b8b3ca0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3cb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3cc0: c0 3c 8b 6b 00 88 ff ff c0 3c 8b 6b 00 88 ff ff  .<.k.....<.k....
+Object ffff88006b8b3cd0: 00 00 00 00 00 00 00 00 0a 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3ce0: 70 07 01 00 ff ff ff ff 90 f8 fe ff 00 00 00 00  p...............
+Object ffff88006b8b3cf0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3d00: 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3d10: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3d20: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3d30: 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3d40: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3d50: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3d60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3d70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3d80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3d90: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3da0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3db0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3dc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3dd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3de0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3df0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3e00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3e10: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3e20: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3e30: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3e40: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3e50: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3e60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3e70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3e80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3e90: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3ea0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3eb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3ec0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3ed0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3ee0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3ef0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3f00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3f10: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3f20: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3f30: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3f40: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3f50: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3f60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3f70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3f80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3f90: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3fa0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88006b8b3ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+CPU: 1 PID: 883 Comm: kworker/1:2 Tainted: G    B           4.3.0-rc4-kasan #42
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.7.5-0-ge51488c-20140602_164612-nilsson.home.kraxel.org 04/01/2014
+Workqueue: pm pm_runtime_work
+ 00000000ffffffff ffff88006c357728 ffffffff81a42f70 ffff88006cc01400
+ ffff88006b8b3800 ffff88006b8b0000 ffff88006c357758 ffffffff8145aa24
+ ffff88006cc01400 ffffea0001ae2c00 ffff88006b8b3800 ffff88006b412000
+Call Trace:
+ [<     inline     >] __dump_stack lib/dump_stack.c:15
+ [<ffffffff81a42f70>] dump_stack+0x68/0x88 lib/dump_stack.c:50
+ [<ffffffff8145aa24>] print_trailer+0xf4/0x150 mm/slub.c:650
+ [<ffffffff8145f6cf>] object_err+0x2f/0x40 mm/slub.c:657
+ [<     inline     >] print_address_description mm/kasan/report.c:135
+ [<ffffffff81461951>] kasan_report_error+0x1f1/0x4a0 mm/kasan/report.c:225
+ [<ffffffff8113feef>] ? flush_work+0x1ff/0x4c0 kernel/workqueue.c:2740
+ [<     inline     >] kasan_report mm/kasan/report.c:246
+ [<ffffffff81461cbe>] __asan_report_load4_noabort+0x3e/0x40 mm/kasan/report.c:266
+ [<     inline     >] ? xhci_find_slot_id_by_port drivers/usb/host/xhci-hub.c:252
+ [<ffffffff8250791c>] ? xhci_bus_suspend+0x70c/0x7e0 drivers/usb/host/xhci-hub.c:1153
+ [<     inline     >] xhci_find_slot_id_by_port drivers/usb/host/xhci-hub.c:252
+ [<ffffffff8250791c>] xhci_bus_suspend+0x70c/0x7e0 drivers/usb/host/xhci-hub.c:1153
+ [<ffffffff82507210>] ? xhci_hub_status_data+0x580/0x580 drivers/usb/host/xhci-hub.c:1101
+ [<ffffffff8236c81b>] ? hub_suspend+0x5ab/0xa40 drivers/usb/core/hub.c:3578
+ [<ffffffff82382f4a>] hcd_bus_suspend+0x19a/0x410 drivers/usb/core/hcd.c:2177
+ [<ffffffff82382db0>] ? hcd_bus_resume+0x450/0x450 drivers/usb/core/hcd.c:2248
+ [<ffffffff820b8890>] ? rpm_resume+0x1780/0x1780 include/linux/pm_runtime.h:113
+ [<ffffffff820b8890>] ? rpm_resume+0x1780/0x1780 include/linux/pm_runtime.h:113
+ [<ffffffff823ab4cd>] generic_suspend+0xbd/0xd0 drivers/usb/core/generic.c:209
+ [<     inline     >] usb_suspend_device drivers/usb/core/driver.c:1139
+ [<ffffffff823900d8>] usb_suspend_both+0x4d8/0x630 drivers/usb/core/driver.c:1305
+ [<ffffffff82393fd0>] ? usb_probe_interface+0x7e0/0x7e0 drivers/usb/core/driver.c:345
+ [<ffffffff8239400d>] usb_runtime_suspend+0x3d/0x110 drivers/usb/core/driver.c:1812
+ [<ffffffff82393fd0>] ? usb_probe_interface+0x7e0/0x7e0 drivers/usb/core/driver.c:345
+ [<ffffffff820b6236>] __rpm_callback+0x96/0x170 drivers/base/power/runtime.c:276
+ [<ffffffff82393fd0>] ? usb_probe_interface+0x7e0/0x7e0 drivers/usb/core/driver.c:345
+ [<ffffffff820b648a>] rpm_callback+0x17a/0x220 drivers/base/power/runtime.c:387
+ [<ffffffff82393fd0>] ? usb_probe_interface+0x7e0/0x7e0 drivers/usb/core/driver.c:345
+ [<ffffffff820b8b84>] rpm_suspend+0x2f4/0x14c0 drivers/base/power/runtime.c:519
+ [<ffffffff820b8890>] ? rpm_resume+0x1780/0x1780 include/linux/pm_runtime.h:113
+ [<ffffffff823710d0>] ? hub_port_debounce+0x260/0x260 drivers/usb/core/hub.c:4115
+ [<ffffffff820b0101>] ? autosuspend_delay_ms_show+0x61/0xb0 drivers/base/power/sysfs.c:194
+ [<ffffffff820bb1ca>] __pm_runtime_suspend+0xaa/0xe0 drivers/base/power/runtime.c:932
+ [<ffffffff82394110>] ? usb_runtime_resume+0x30/0x30 drivers/usb/core/driver.c:1839
+ [<     inline     >] pm_runtime_autosuspend include/linux/pm_runtime.h:193
+ [<ffffffff8239413f>] usb_runtime_idle+0x2f/0x40 drivers/usb/core/driver.c:1849
+ [<ffffffff820b6236>] __rpm_callback+0x96/0x170 drivers/base/power/runtime.c:276
+ [<ffffffff82394110>] ? usb_runtime_resume+0x30/0x30 drivers/usb/core/driver.c:1839
+ [<ffffffff820ba3fb>] rpm_idle+0x41b/0x690 drivers/base/power/runtime.c:349
+ [<ffffffff820bbf68>] pm_runtime_work+0x168/0x1a0 drivers/base/power/runtime.c:797
+ [<ffffffff81142151>] process_one_work+0x6d1/0x1370 kernel/workqueue.c:2030
+ [<ffffffff81142ed3>] worker_thread+0xe3/0x1300 kernel/workqueue.c:2162
+ [<     inline     >] ? context_switch kernel/sched/core.c:2651
+ [<ffffffff830b6551>] ? __schedule+0x911/0x1d40 kernel/sched/core.c:3115
+ [<ffffffff811552d7>] kthread+0x1e7/0x260 kernel/kthread.c:209
+ [<ffffffff81142df0>] ? process_one_work+0x1370/0x1370 kernel/workqueue.c:1973
+ [<ffffffff811550f0>] ? kthread_worker_fn+0x5e0/0x5e0 include/linux/list.h:102
+ [<ffffffff811550f0>] ? kthread_worker_fn+0x5e0/0x5e0 include/linux/list.h:102
+ [<ffffffff830c293f>] ret_from_fork+0x3f/0x70 arch/x86/entry/entry_64.S:475
+ [<ffffffff811550f0>] ? kthread_worker_fn+0x5e0/0x5e0 include/linux/list.h:102
+Memory state around the buggy address:
+ ffff88006b8b3700: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+ ffff88006b8b3780: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+>ffff88006b8b3800: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+                            ^
+ ffff88006b8b3880: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+ ffff88006b8b3900: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+==================================================================
+kasan: CONFIG_KASAN_INLINE enabled
+kasan: GPF could be caused by NULL-ptr deref or user memory accessgeneral protection fault: 0000 [#1] SMP KASAN
+Modules linked in:
+CPU: 1 PID: 883 Comm: kworker/1:2 Tainted: G    B           4.3.0-rc4-kasan #42
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.7.5-0-ge51488c-20140602_164612-nilsson.home.kraxel.org 04/01/2014
+Workqueue: pm pm_runtime_work
+task: ffff88006c551780 ti: ffff88006c350000 task.ti: ffff88006c350000
+RIP: 0010:[<ffffffff82502f49>]  [<ffffffff82502f49>] xhci_stop_device.constprop.8+0xa9/0x2c0
+RSP: 0018:ffff88006c3577e0  EFLAGS: 00010002
+RAX: 000000000000036b RBX: 0000000000001b58 RCX: 0000000000000000
+RDX: 0000000000000000 RSI: ffffffff834ab960 RDI: ffff88006c69a2a8
+RBP: ffff88006c357828 R08: ffff88006d3213e0 R09: ffffed000d898ea4
+R10: 0000000000000000 R11: ffff88006c551948 R12: 000000000000001e
+R13: dffffc0000000000 R14: ffff88006c69a260 R15: ffff88006c69a000
+FS:  0000000000000000(0000) GS:ffff88006d300000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 000000008005003b
+CR2: 00000000006ec000 CR3: 000000006b58f000 CR4: 00000000000006e0
+Stack:
+ 0000000000000246 ffff88006c69a2a8 ffff88006b9f3080 000000016c69a2a8
+ ffff88006c69a2a8 0000000000000001 dffffc0000000000 ffff88006b412000
+ ffff88006c69a000 ffff88006c357938 ffffffff825076be ffff88006b8b3800
+Call Trace:
+ [<ffffffff825076be>] xhci_bus_suspend+0x4ae/0x7e0 drivers/usb/host/xhci-hub.c:1157
+ [<ffffffff82507210>] ? xhci_hub_status_data+0x580/0x580 drivers/usb/host/xhci-hub.c:1101
+ [<ffffffff8236c81b>] ? hub_suspend+0x5ab/0xa40 drivers/usb/core/hub.c:3578
+ [<ffffffff82382f4a>] hcd_bus_suspend+0x19a/0x410 drivers/usb/core/hcd.c:2177
+ [<ffffffff82382db0>] ? hcd_bus_resume+0x450/0x450 drivers/usb/core/hcd.c:2248
+ [<ffffffff820b8890>] ? rpm_resume+0x1780/0x1780 include/linux/pm_runtime.h:113
+ [<ffffffff820b8890>] ? rpm_resume+0x1780/0x1780 include/linux/pm_runtime.h:113
+ [<ffffffff823ab4cd>] generic_suspend+0xbd/0xd0 drivers/usb/core/generic.c:209
+ [<     inline     >] usb_suspend_device drivers/usb/core/driver.c:1139
+ [<ffffffff823900d8>] usb_suspend_both+0x4d8/0x630 drivers/usb/core/driver.c:1305
+ [<ffffffff82393fd0>] ? usb_probe_interface+0x7e0/0x7e0 drivers/usb/core/driver.c:345
+ [<ffffffff8239400d>] usb_runtime_suspend+0x3d/0x110 drivers/usb/core/driver.c:1812
+ [<ffffffff82393fd0>] ? usb_probe_interface+0x7e0/0x7e0 drivers/usb/core/driver.c:345
+ [<ffffffff820b6236>] __rpm_callback+0x96/0x170 drivers/base/power/runtime.c:276
+ [<ffffffff82393fd0>] ? usb_probe_interface+0x7e0/0x7e0 drivers/usb/core/driver.c:345
+ [<ffffffff820b648a>] rpm_callback+0x17a/0x220 drivers/base/power/runtime.c:387
+ [<ffffffff82393fd0>] ? usb_probe_interface+0x7e0/0x7e0 drivers/usb/core/driver.c:345
+ [<ffffffff820b8b84>] rpm_suspend+0x2f4/0x14c0 drivers/base/power/runtime.c:519
+ [<ffffffff820b8890>] ? rpm_resume+0x1780/0x1780 include/linux/pm_runtime.h:113
+ [<ffffffff823710d0>] ? hub_port_debounce+0x260/0x260 drivers/usb/core/hub.c:4115
+ [<ffffffff820b0101>] ? autosuspend_delay_ms_show+0x61/0xb0 drivers/base/power/sysfs.c:194
+ [<ffffffff820bb1ca>] __pm_runtime_suspend+0xaa/0xe0 drivers/base/power/runtime.c:932
+ [<ffffffff82394110>] ? usb_runtime_resume+0x30/0x30 drivers/usb/core/driver.c:1839
+ [<     inline     >] pm_runtime_autosuspend include/linux/pm_runtime.h:193
+ [<ffffffff8239413f>] usb_runtime_idle+0x2f/0x40 drivers/usb/core/driver.c:1849
+ [<ffffffff820b6236>] __rpm_callback+0x96/0x170 drivers/base/power/runtime.c:276
+ [<ffffffff82394110>] ? usb_runtime_resume+0x30/0x30 drivers/usb/core/driver.c:1839
+ [<ffffffff820ba3fb>] rpm_idle+0x41b/0x690 drivers/base/power/runtime.c:349
+ [<ffffffff820bbf68>] pm_runtime_work+0x168/0x1a0 drivers/base/power/runtime.c:797
+ [<ffffffff81142151>] process_one_work+0x6d1/0x1370 kernel/workqueue.c:2030
+ [<ffffffff81142ed3>] worker_thread+0xe3/0x1300 kernel/workqueue.c:2162
+ [<     inline     >] ? context_switch kernel/sched/core.c:2651
+ [<ffffffff830b6551>] ? __schedule+0x911/0x1d40 kernel/sched/core.c:3115
+ [<ffffffff811552d7>] kthread+0x1e7/0x260 kernel/kthread.c:209
+ [<ffffffff81142df0>] ? process_one_work+0x1370/0x1370 kernel/workqueue.c:1973
+ [<ffffffff811550f0>] ? kthread_worker_fn+0x5e0/0x5e0 include/linux/list.h:102
+ [<ffffffff811550f0>] ? kthread_worker_fn+0x5e0/0x5e0 include/linux/list.h:102
+ [<ffffffff830c293f>] ret_from_fork+0x3f/0x70 arch/x86/entry/entry_64.S:475
+ [<ffffffff811550f0>] ? kthread_worker_fn+0x5e0/0x5e0 include/linux/list.h:102
+Code: bc 1e 00 00 00 49 bd 00 00 00 00 00 fc ff df 48 89 c7 48 89 45 c0 e8 07 f3 bb 00 48 89 45 b8 e8 fe ef f5 fe 48 89 d8 48 c1 e8 03 <42> 80 3c 28 00 0f 85 cf 01 00 00 4c 8b 3b 4d 85 ff 74 5d e8 df
+RIP  [<ffffffff82502f49>] xhci_stop_device.constprop.8+0xa9/0x2c0 drivers/usb/host/xhci-hub.c:287
+ RSP <ffff88006c3577e0>
+---[ end trace aa7306252234481c ]---
+kworker/1:2 (883) used greatest stack depth: 26200 bytes left
+BUG: unable to handle kernel paging request at ffffffffffffffd8
+IP: [<ffffffff811563bd>] kthread_data+0x4d/0x70 kernel/kthread.c:137
+PGD 3811067 PUD 3813067 PMD 0
+Oops: 0000 [#2] SMP KASAN
+Modules linked in:
+CPU: 1 PID: 883 Comm: kworker/1:2 Tainted: G    B D         4.3.0-rc4-kasan #42
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.7.5-0-ge51488c-20140602_164612-nilsson.home.kraxel.org 04/01/2014
+task: ffff88006c551780 ti: ffff88006c350000 task.ti: ffff88006c350000
+RIP: 0010:[<ffffffff811563bd>]  [<ffffffff811563bd>] kthread_data+0x4d/0x70
+RSP: 0018:ffff88006c357408  EFLAGS: 00010046
+RAX: dffffc0000000000 RBX: 0000000000000000 RCX: 000000000000b95a
+RDX: 1ffffffffffffffb RSI: 0000000000000001 RDI: ffffffffffffffd8
+RBP: ffff88006c357410 R08: 0000000000005400 R09: 0000003644fddfc2
+R10: ffff88006c551950 R11: ffff88006c551958 R12: 0000000000000001
+R13: ffff88006d31e180 R14: ffff88006c5517c4 R15: ffff88006c551780
+FS:  0000000000000000(0000) GS:ffff88006d300000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 000000008005003b
+CR2: 0000000000000028 CR3: 000000006b58f000 CR4: 00000000000006e0
+Stack:
+ ffff88006c551780 ffff88006c357430 ffffffff8114939a ffff88006d31e180
+ 000000000001e180 ffff88006c3574a0 ffffffff830b6a62 ffff88006c3574d8
+ ffff88006c357478 ffffed0000000000 ffff88006d31ea00 ffff88006d31ea28
+Call Trace:
+ [<ffffffff8114939a>] wq_worker_sleeping+0x1a/0x1f0 kernel/workqueue.c:847
+ [<ffffffff830b6a62>] __schedule+0xe22/0x1d40 kernel/sched/core.c:3094
+ [<ffffffff830b7a0e>] schedule+0x8e/0x1a0 kernel/sched/core.c:3144
+ [<ffffffff810ff86a>] do_exit+0x1b1a/0x2d40 kernel/exit.c:824
+ [<ffffffff810fdd50>] ? release_task+0x12d0/0x12d0 include/linux/list.h:90
+ [<ffffffff811eaf58>] ? vprintk_default+0x28/0x30 kernel/printk/printk.c:1860
+ [<ffffffff8137f800>] ? printk+0xaf/0xcf kernel/printk/printk.c:1910
+ [<ffffffff8137f751>] ? power_down+0x11b/0x11b kernel/power/hibernate.c:642
+ [<     inline     >] ? __rcu_read_unlock include/linux/rcupdate.h:305
+ [<     inline     >] ? rcu_read_unlock include/linux/rcupdate.h:913
+ [<ffffffff811ec3ff>] ? kmsg_dump+0x22f/0x330 kernel/printk/printk.c:2860
+ [<ffffffff811ec1d0>] ? wake_up_klogd+0x40/0x40 kernel/printk/printk.c:2707
+ [<ffffffff810154e5>] oops_end+0x95/0xc0 arch/x86/kernel/dumpstack.c:250
+ [<ffffffff810158c6>] die+0x46/0x60 arch/x86/kernel/dumpstack.c:316
+ [<ffffffff810105be>] do_general_protection+0x1de/0x350 arch/x86/kernel/traps.c:463
+ [<     inline     >] ? kasan_poison_shadow mm/kasan/kasan.c:49
+ [<ffffffff81461076>] ? kasan_unpoison_shadow+0x36/0x50 mm/kasan/kasan.c:54
+ [<ffffffff830c4418>] general_protection+0x28/0x30 arch/x86/entry/entry_64.S:981
+ [<ffffffff82502f49>] ? xhci_stop_device.constprop.8+0xa9/0x2c0 drivers/usb/host/xhci-hub.c:287
+ [<ffffffff825076be>] xhci_bus_suspend+0x4ae/0x7e0 drivers/usb/host/xhci-hub.c:1157
+ [<ffffffff82507210>] ? xhci_hub_status_data+0x580/0x580 drivers/usb/host/xhci-hub.c:1101
+ [<ffffffff8236c81b>] ? hub_suspend+0x5ab/0xa40 drivers/usb/core/hub.c:3578
+ [<ffffffff82382f4a>] hcd_bus_suspend+0x19a/0x410 drivers/usb/core/hcd.c:2177
+ [<ffffffff82382db0>] ? hcd_bus_resume+0x450/0x450 drivers/usb/core/hcd.c:2248
+ [<ffffffff820b8890>] ? rpm_resume+0x1780/0x1780 include/linux/pm_runtime.h:113
+ [<ffffffff820b8890>] ? rpm_resume+0x1780/0x1780 include/linux/pm_runtime.h:113
+ [<ffffffff823ab4cd>] generic_suspend+0xbd/0xd0 drivers/usb/core/generic.c:209
+ [<     inline     >] usb_suspend_device drivers/usb/core/driver.c:1139
+ [<ffffffff823900d8>] usb_suspend_both+0x4d8/0x630 drivers/usb/core/driver.c:1305
+ [<ffffffff82393fd0>] ? usb_probe_interface+0x7e0/0x7e0 drivers/usb/core/driver.c:345
+ [<ffffffff8239400d>] usb_runtime_suspend+0x3d/0x110 drivers/usb/core/driver.c:1812
+ [<ffffffff82393fd0>] ? usb_probe_interface+0x7e0/0x7e0 drivers/usb/core/driver.c:345
+ [<ffffffff820b6236>] __rpm_callback+0x96/0x170 drivers/base/power/runtime.c:276
+ [<ffffffff82393fd0>] ? usb_probe_interface+0x7e0/0x7e0 drivers/usb/core/driver.c:345
+ [<ffffffff820b648a>] rpm_callback+0x17a/0x220 drivers/base/power/runtime.c:387
+ [<ffffffff82393fd0>] ? usb_probe_interface+0x7e0/0x7e0 drivers/usb/core/driver.c:345
+ [<ffffffff820b8b84>] rpm_suspend+0x2f4/0x14c0 drivers/base/power/runtime.c:519
+ [<ffffffff820b8890>] ? rpm_resume+0x1780/0x1780 include/linux/pm_runtime.h:113
+ [<ffffffff823710d0>] ? hub_port_debounce+0x260/0x260 drivers/usb/core/hub.c:4115
+ [<ffffffff820b0101>] ? autosuspend_delay_ms_show+0x61/0xb0 drivers/base/power/sysfs.c:194
+ [<ffffffff820bb1ca>] __pm_runtime_suspend+0xaa/0xe0 drivers/base/power/runtime.c:932
+ [<ffffffff82394110>] ? usb_runtime_resume+0x30/0x30 drivers/usb/core/driver.c:1839
+ [<     inline     >] pm_runtime_autosuspend include/linux/pm_runtime.h:193
+ [<ffffffff8239413f>] usb_runtime_idle+0x2f/0x40 drivers/usb/core/driver.c:1849
+ [<ffffffff820b6236>] __rpm_callback+0x96/0x170 drivers/base/power/runtime.c:276
+ [<ffffffff82394110>] ? usb_runtime_resume+0x30/0x30 drivers/usb/core/driver.c:1839
+ [<ffffffff820ba3fb>] rpm_idle+0x41b/0x690 drivers/base/power/runtime.c:349
+ [<ffffffff820bbf68>] pm_runtime_work+0x168/0x1a0 drivers/base/power/runtime.c:797
+ [<ffffffff81142151>] process_one_work+0x6d1/0x1370 kernel/workqueue.c:2030
+ [<ffffffff81142ed3>] worker_thread+0xe3/0x1300 kernel/workqueue.c:2162
+ [<     inline     >] ? context_switch kernel/sched/core.c:2651
+ [<ffffffff830b6551>] ? __schedule+0x911/0x1d40 kernel/sched/core.c:3115
+ [<ffffffff811552d7>] kthread+0x1e7/0x260 kernel/kthread.c:209
+ [<ffffffff81142df0>] ? process_one_work+0x1370/0x1370 kernel/workqueue.c:1973
+ [<ffffffff811550f0>] ? kthread_worker_fn+0x5e0/0x5e0 include/linux/list.h:102
+ [<ffffffff811550f0>] ? kthread_worker_fn+0x5e0/0x5e0 include/linux/list.h:102
+ [<ffffffff830c293f>] ret_from_fork+0x3f/0x70 arch/x86/entry/entry_64.S:475
+ [<ffffffff811550f0>] ? kthread_worker_fn+0x5e0/0x5e0 include/linux/list.h:102
+Code: c1 ea 03 80 3c 02 00 75 29 48 8b 9b d0 04 00 00 48 b8 00 00 00 00 00 fc ff df 48 8d 7b d8 48 89 fa 48 c1 ea 03 80 3c 02 00 75 0e <48> 8b 43 d8 5b 5d c3 e8 f7 b8 30 00 eb d0 e8 f0 b8 30 00 eb eb
+RIP  [<ffffffff811563bd>] kthread_data+0x4d/0x70 kernel/kthread.c:137
+ RSP <ffff88006c357408>
+CR2: ffffffffffffffd8
+---[ end trace aa7306252234481d ]---
+Fixing recursive fault but reboot is needed!

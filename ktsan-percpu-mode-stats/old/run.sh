@@ -2,10 +2,10 @@
 
 go run fuzzer.go \
 	-args="--dangerous -q -m -C 16" \
-	-binary=/usr/local/google/home/andreyknvl/qemu/image/wheezy/bin/trinity \
-	-bzimage=/usr/local/google/home/andreyknvl/stats/old/bzImage \
-	-diskimage=/usr/local/google/home/andreyknvl/qemu/image/wheezy.img \
-	-id_rsa=/usr/local/google/home/andreyknvl/qemu/image/ssh/id_rsa \
+	-binary=~/qemu/image/wheezy/bin/trinity \
+	-bzimage=~/stats/old/bzImage \
+	-diskimage=~/qemu/image/wheezy.img \
+	-id_rsa=~/qemu/image/ssh/id_rsa \
 	-memmb=20000 \
 	-maxcpu=4 \
 	-ninst=1 \
