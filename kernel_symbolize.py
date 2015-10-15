@@ -151,7 +151,7 @@ class ReportProcesser:
     for i, frame in enumerate(frames):
       inlined = (i + 1 != len(frames))
       func, fileline = frame[0], frame[1]
-      fileline = fileline.split(' (')[0] # strip '(discriminator N)'
+      fileline = fileline.split(' (')[0] # strip ' (discriminator N)'
       self.PrintFrame(inlined, precise, prefix, addr, func, fileline, body)
       self.PrintLines(fileline, lines_before, lines_after)
 
@@ -213,8 +213,9 @@ class ReportProcesser:
     lines = self.LoadFile(filename)
     if not lines:
       return
-    for line in lines[start:end]:
-      print line,
+
+    for i, line in enumerate(lines[start:end]):
+      print '  {0:5d} {1}'.format(i + start + 1, line),
 
   def Finalize(self):
     for module, symbolizer in self.module_symbolizers.items():
